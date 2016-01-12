@@ -12,4 +12,5 @@ applications:
     KIBANA_OAUTH2_CLIENT_ID: "<%= p('push-kibana.oauth2_client_id')%>"
     KIBANA_OAUTH2_CLIENT_SECRET: "<%= p('push-kibana.oauth2_client_secret')%>"
     CF_API_URI: "https://api.<%= p('cloudfoundry.system_domain')%>"
+    CF_SYSTEM_ORG: "<%= p('cloudfoundry.system_org')%>"
     SKIP_SSL_VALIDATION: <%= p('cloudfoundry.skip_ssl_validation')%>
