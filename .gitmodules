@@ -9,4 +9,5 @@
 	url = https://github.com/logsearch/logsearch-boshrelease.git
 [submodule "src/kibana-cf_authentication"]
 	path = src/kibana-cf_authentication
-	url = https://github.com/stayup-io/kibana-cf_authentication.git
+	url = https://github.com/18f/kibana-cf_authentication.git
+	branch = authorization
