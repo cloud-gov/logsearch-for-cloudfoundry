@@ -1,0 +1,27 @@
+---
+meta:
+  environment: (( name ))
+
+name: logsearch
+director_uuid: <%= `bosh status --uuid` %>
+
+properties:
+  push-kibana:
+    app_memory: "512M"
+    oauth2_client_secret: "c1oudc0w"
+  nats:
+    user: nats
+    password: nats
+    machines:
+      - 10.244.0.6
+
+  cloudfoundry:
+    skip_ssl_validation: true
+    system_domain: bosh-lite.com
+    api_access_security_group: logsearch
+    firehose_port: 443
+    firehose_user: admin
+    firehose_password: admin
+    admin_username: admin
+    admin_password: admin
+    admin_client_secret: "admin-secret"

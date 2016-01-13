@@ -1,0 +1,7 @@
+---
+meta:
+  <<: (( merge ))
+
+  stemcell:
+    name: bosh-warden-aws-ubuntu-trusty-go_agent
+    version: latest
