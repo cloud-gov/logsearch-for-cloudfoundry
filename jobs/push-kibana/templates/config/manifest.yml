@@ -14,3 +14,4 @@ applications:
     CF_API_URI: "https://api.<%= p('cloudfoundry.system_domain')%>"
     CF_SYSTEM_ORG: "<%= p('cloudfoundry.system_org')%>"
     SKIP_SSL_VALIDATION: <%= p('cloudfoundry.skip_ssl_validation')%>
+    REDIS_HOST: <%= p('redis.host')%>

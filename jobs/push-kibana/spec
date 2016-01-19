@@ -55,3 +55,5 @@ properties:
     description: "The (internal) port for Elasticsearch API node ( default: 9200 )"
     default: 9200
 
+  redis.host:
+    description: "The redis host to use for session cache ( eg: 10.244.0.106 )"
