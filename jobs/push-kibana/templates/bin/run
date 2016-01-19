@@ -51,9 +51,6 @@ cf target -o "$org" -s "$space"
 cf create-security-group allow_access_to_elasticsearch /var/vcap/jobs/push-kibana/config/allow_access_to_elasticsearch.rules.json
 cf bind-security-group allow_access_to_elasticsearch "$org" "$space"
 
-# Ensure apps in $space have firewall access to CF api 
-cf bind-security-group "<%= p('cloudfoundry.api_access_security_group') %>" "$org" "$space"
-
 # Create UAA client: <%= p('push-kibana.oauth2_client_id')%> if not already exists
 ACCESS_TOKEN=$(\
 curl -s -D - -k \
