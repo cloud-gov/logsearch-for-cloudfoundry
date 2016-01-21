@@ -1,7 +1,12 @@
-[ 
-	{
-		"protocol":"tcp",
-		"destination":"<%= p('elasticsearch.admin_ip') %>/32",
-		"ports":"<%= p('elasticsearch.admin_port') %>" 
-	} 
+[
+    {
+        "protocol":"tcp",
+        "destination":"<%= p('elasticsearch.admin_ip') %>/32",
+        "ports":"<%= p('elasticsearch.admin_port') %>"
+    },
+    {
+        "protocol":"tcp",
+        "destination":"<%= p('redis.host') %>/32"
+        "ports":"6379"
+    }
 ]
