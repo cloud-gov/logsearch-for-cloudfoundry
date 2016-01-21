@@ -285,15 +285,6 @@
         "doc_values": true
       },
       {
-        "name": "app_event.metadata.request.state",
-        "type": "string",
-        "count": 0,
-        "scripted": false,
-        "indexed": true,
-        "analyzed": false,
-        "doc_values": true
-      },
-      {
         "name": "app_event.app_id",
         "type": "string",
         "count": 0,
@@ -304,6 +295,15 @@
       },
       {
         "name": "@source.instance",
+        "type": "number",
+        "count": 0,
+        "scripted": false,
+        "indexed": true,
+        "analyzed": false,
+        "doc_values": true
+      },
+      {
+        "name": "app_event.metadata.request.instances",
         "type": "number",
         "count": 0,
         "scripted": false,
@@ -367,6 +367,15 @@
       },
       {
         "name": "RTR.verb",
+        "type": "string",
+        "count": 0,
+        "scripted": false,
+        "indexed": true,
+        "analyzed": false,
+        "doc_values": true
+      },
+      {
+        "name": "RTR.x_forwarded_proto",
         "type": "string",
         "count": 0,
         "scripted": false,
@@ -501,6 +510,15 @@
         "doc_values": true
       },
       {
+        "name": "RTR.request_bytes_received",
+        "type": "number",
+        "count": 0,
+        "scripted": false,
+        "indexed": true,
+        "analyzed": false,
+        "doc_values": true
+      },
+      {
         "name": "RTR.hostname",
         "type": "string",
         "count": 0,
@@ -521,6 +539,33 @@
       {
         "name": "@source.host",
         "type": "string",
+        "count": 0,
+        "scripted": false,
+        "indexed": true,
+        "analyzed": false,
+        "doc_values": true
+      },
+      {
+        "name": "container.cpu_percentage",
+        "type": "number",
+        "count": 0,
+        "scripted": false,
+        "indexed": true,
+        "analyzed": false,
+        "doc_values": true
+      },
+      {
+        "name": "container.memory_bytes",
+        "type": "number",
+        "count": 0,
+        "scripted": false,
+        "indexed": true,
+        "analyzed": false,
+        "doc_values": true
+      },
+      {
+        "name": "container.disk_bytes",
+        "type": "number",
         "count": 0,
         "scripted": false,
         "indexed": true,
