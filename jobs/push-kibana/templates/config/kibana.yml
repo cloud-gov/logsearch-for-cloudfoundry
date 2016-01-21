@@ -17,7 +17,7 @@ elasticsearch.preserveHost: true
 kibana.index: "<%= p('push-kibana.kibana_index') %>"
 
 # The default application to load.
-kibana.defaultAppId: "dashboard/Overview"
+kibana.defaultAppId: "dashboard/App-Overview"
 
 # If your Elasticsearch is protected with basic auth, this is the user credentials
 # used by the Kibana server to perform maintenance on the kibana_index at startup. Your Kibana
