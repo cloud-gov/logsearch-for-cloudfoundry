@@ -51,7 +51,7 @@ cf target -o "$org" -s "$space"
 cf create-security-group allow_access_to_elasticsearch /var/vcap/jobs/push-kibana/config/allow_access_to_elasticsearch.rules.json
 cf bind-security-group allow_access_to_elasticsearch "$org" "$space"
 
-# Ensure apps in $space have firewall access to CF api 
+# Ensure apps in $space have firewall access to CF api
 cf bind-security-group "<%= p('cloudfoundry.api_access_security_group') %>" "$org" "$space"
 
 # Create UAA client: <%= p('push-kibana.oauth2_client_id')%> if not already exists
@@ -93,7 +93,7 @@ echo "Creating new OAuth2 client: <%= p('push-kibana.oauth2_client_id')%>"
   "resource_ids" : ["none"],
   "authorized_grant_types" : ["authorization_code", "refresh_token"],
   "access_token_validity": 43200,
-  "redirect-uri": "https://<%= p('push-kibana.app_name')%>.<%= p('cloudfoundry.system_domain')%>/login"
+  "redirect-uri": "https://<%= p('push-kibana.app_name')%>.<%= p('cloudfoundry.apps_domain')%>/login"
 }' \
 -X POST https://uaa.<%= p('cloudfoundry.system_domain')%>/oauth/clients
 
