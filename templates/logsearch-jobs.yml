@@ -87,7 +87,7 @@ jobs:
   templates:
   - { release: logsearch, name: elasticsearch }
   instances: 2
-  resource_pool: high_memory
+  resource_pool: high_cpu_high_memory
   networks:
   - name: default
   persistent_disk_pool: elasticsearch_data

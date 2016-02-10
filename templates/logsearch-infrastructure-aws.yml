@@ -67,5 +67,13 @@ resource_pools:
       type: gp2
     availability_zone: (( meta.zones.z1 ))
     key_name: (( meta.aws.key_name ))
+- name: high_cpu_high_memory
+  cloud_properties:
+    instance_type: m4.xlarge
+    ephemeral_disk:
+      size: 100_000
+      type: gp2
+    availability_zone: (( meta.zones.z1 ))
+    key_name: (( meta.aws.key_name ))
 
 networks: (( merge ))

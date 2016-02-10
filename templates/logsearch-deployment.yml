@@ -74,3 +74,8 @@ resource_pools:
   cloud_properties: ~
   env: (( merge || meta.default_env ))
 
+- name: high_cpu_high_memory
+  network: default
+  stemcell: (( meta.stemcell ))
+  cloud_properties: ~
+  env: (( merge || meta.default_env ))
