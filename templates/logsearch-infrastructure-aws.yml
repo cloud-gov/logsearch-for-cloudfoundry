@@ -19,6 +19,14 @@ properties:
         <<: (( merge ))
         ES_HEAP_SIZE: 1024M
 
+disk_pools:
+  - name: "elasticsearch_master"
+    cloud_properties: {type: gp2}
+  - name: "elasticsearch_data"
+    cloud_properties: {type: gp2}
+  - name: "queue"
+    cloud_properties: {type: gp2}
+
 update:
   canaries: 1
   max_in_flight: 50
