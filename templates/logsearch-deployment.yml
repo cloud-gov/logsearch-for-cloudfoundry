@@ -44,10 +44,13 @@ update:
 disk_pools:
   - name: "elasticsearch_master"
     disk_size: (( meta.disk_size.elasticsearch_master ))
+    cloud_properties: ~
   - name: "elasticsearch_data"
     disk_size: (( meta.disk_size.elasticsearch_data ))
+    cloud_properties: ~
   - name: "queue"
     disk_size: (( meta.disk_size.queue ))
+    cloud_properties: ~
 
 resource_pools:
 - name: tiny
