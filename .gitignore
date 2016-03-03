@@ -54,3 +54,5 @@ src/logsearch-config/vendor/logstash*
 
 #VIM artifacts
 *.swp
+#pipeline
+credentials.yml
