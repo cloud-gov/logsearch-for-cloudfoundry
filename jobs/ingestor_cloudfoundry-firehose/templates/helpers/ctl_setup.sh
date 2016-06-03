@@ -18,6 +18,7 @@ JOB_NAME_syslog=${1}_syslog
 output_label=${2:-${JOB_NAME}}
 
 export JOB_DIR=/var/vcap/jobs/$JOB_NAME
+export PACKAGE_DIR=/var/vcap/packages/$JOB_NAME
 chmod 755 $JOB_DIR # to access file via symlink
 
 # Load some bosh deployment properties into env vars
@@ -31,7 +32,7 @@ redirect_output ${output_label}
 export HOME=${HOME:-/home/vcap}
 
 # Add all packages' /bin & /sbin into $PATH
-for package_bin_dir in $(ls -d /var/vcap/packages/*/*bin)
+for package_bin_dir in $(ls -d /var/vcap/packages/firehose-to-syslog*/*bin)
 do
   export PATH=${package_bin_dir}:$PATH
 done
