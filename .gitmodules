@@ -1,6 +1,7 @@
 [submodule "src/firehose-to-syslog"]
 	path = src/firehose-to-syslog
-	url = https://github.com/cloudfoundry-community/firehose-to-syslog.git
+	url = https://github.com/18F/firehose-to-syslog.git
+	branch = doppler-port
 [submodule "src/collector"]
 	path = src/collector
 	url = https://github.com/stayup-io/collector.git
