@@ -31,7 +31,7 @@ cd $TMPDIR/kibana-for-cf
 cf api <% if p("cloudfoundry.skip_ssl_validation") %>--skip-ssl-validation<% end %> https://api.<%= p("cloudfoundry.system_domain") %>
 
 # login without org and space in case they do not exist yet
-cf auth <%= p("cloudfoundry.admin_username") %> "<%= p("cloudfoundry.admin_password").gsub('"', '\"') %>"
+cf auth <%= p("cloudfoundry.admin_username") %> "<%= p("cloudfoundry.admin_client_secret").gsub('"', '\"') %>"
 
 # Create a new org, don't fail if they already exist
 org=<%= p('cloudfoundry.system_org') %>

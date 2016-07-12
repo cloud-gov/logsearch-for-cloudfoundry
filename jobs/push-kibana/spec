@@ -46,8 +46,6 @@ properties:
     default: false
   cloudfoundry.admin_username:
     description: "The Elastic Runtime API user"
-  cloudfoundry.admin_password:
-    description: "The Elastic Runtime API user's password"
   cloudfoundry.admin_client_secret:
     description: "The UAA Admin client id's secret"
 

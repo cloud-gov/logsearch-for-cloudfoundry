@@ -19,7 +19,6 @@ properties:
     firehose_user: admin
     firehose_password: admin
     admin_username: admin
-    admin_password: admin
     admin_client_secret: "admin-secret"
     api_access_security_group: a-group
   nats:
