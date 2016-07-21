@@ -72,7 +72,7 @@ end
 export_kibana_config es_host, 'index-pattern' ,'[logs-app-]YYYY.MM.DD'
 export_kibana_config es_host, 'index-pattern' ,'[logs-platform-]YYYY.MM.DD'
 
-export_kibana_config es_host, 'config' ,'4.3.1'
+export_kibana_config es_host, 'config' ,'4.5.3'
 
 ## App Overview
 export_kibana_config es_host, 'dashboard', 'App-Overview'

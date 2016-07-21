@@ -2,5 +2,5 @@
 name: kibana-for-cf
 dependencies: []
 files:
-  - kibana-for-cf/kibana-4.3.1-linux-x64.tar.gz
+  - kibana-for-cf/kibana-4.5.3-linux-x64.tar.gz
   - kibana-cf_authentication/**/*
