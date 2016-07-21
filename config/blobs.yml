@@ -15,7 +15,7 @@ golang/go1.4.2.linux-amd64.tar.gz:
   object_id: b7373cab-f7a8-436a-9c6b-089efecb0cd1
   sha: 5020af94b52b65cc9b6f11d50a67e4bae07b0aff
   size: 62442704
-cf-kibana/kibana-4.5.3-linux-x64.tar.gz:
+kibana-for-cf/kibana-4.5.3-linux-x64.tar.gz:
   object_id: 344c1db6-1bb2-4b25-87fe-04b123d5b8cd
   sha: 09ee044b8d8518859254793db741e6241dc3f2bb
   size: 33414498
