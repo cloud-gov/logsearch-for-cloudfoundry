@@ -13,6 +13,9 @@ properties:
   push-kibana.app_name:
     description: "The Kibana log dashboard app name ( eg defaults to: logs )"
     default: logs
+  push-kibana.app_no_hostname:
+    description: "Use domain as root of application"
+    default: false
   push-kibana.kibana_index:
     description: "Elasticsearch index to store Kibana settings and dashboards"
     default: ".kibana"
