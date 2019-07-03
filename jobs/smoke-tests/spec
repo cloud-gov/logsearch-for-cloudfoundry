@@ -2,8 +2,8 @@
 name: smoke-tests
 
 packages:
-  - cf-cli
-  - golang-1.8-linux
+  - cf-cli-6-linux
+  - golang-1.12-linux
   - smoke-tests
 
 templates:
