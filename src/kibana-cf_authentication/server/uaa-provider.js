@@ -38,7 +38,7 @@ module.exports = (server, config, cache) => {
         }
 
         // get user orgs
-        const orgs = await get(config.get('authentication.organizations_uri'))
+        const orgs = await get(config.get('authentication.organizations_uri'), {"results-per-page": 100})
 
         server.log(['debug', 'authentication', 'orgs'], JSON.stringify(orgs))
 
@@ -50,7 +50,7 @@ module.exports = (server, config, cache) => {
         })
 
         // get user spaces
-        const spaces = await get(config.get('authentication.spaces_uri'))
+        const spaces = await get(config.get('authentication.spaces_uri'), {"results-per-page": 100})
 
         server.log(['debug', 'authentication', 'spaces'], JSON.stringify(spaces))
 
