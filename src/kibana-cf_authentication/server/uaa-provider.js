@@ -37,40 +37,30 @@ module.exports = (server, config, cache) => {
           raw: profile
         }
 
-        orgs_next_url = config.get('authentication.organizations_uri')
-        account.orgIds = []
-        account.orgs = []
         // get user orgs
-        while (orgs_next_url) {
-          orgs = await get(orgs_next_url)
-          server.log(['debug', 'authentication', 'orgs'], JSON.stringify(orgs))
+        const orgs = await get(config.get('authentication.organizations_uri'), {"results-per-page": 100})
 
-          account.orgIds.concat(orgs.resources.map((resource) => {
-            return resource.metadata.guid
-          }))
-          account.orgs.concat(orgs.resources.map((resource) => {
-            return resource.entity.name
-          }))
-          orgs_next_url = orgs.next_url
-        }
+        server.log(['debug', 'authentication', 'orgs'], JSON.stringify(orgs))
+
+        account.orgIds = orgs.resources.map((resource) => {
+          return resource.metadata.guid
+        })
+        account.orgs = orgs.resources.map((resource) => {
+          return resource.entity.name
+        })
 
         // get user spaces
-        spaces_next_url = config.get('authentications.spaces_uri')
-        account.spaces = []
-        account.spaceIds = []
+        const spaces = await get(config.get('authentication.spaces_uri'), {"results-per-page": 100})
 
-        while (spaces_next_url) {
-          spaces = await get(spaces_next_url)
-          server.log(['debug', 'authentication', 'spaces'], JSON.stringify(spaces))
+        server.log(['debug', 'authentication', 'spaces'], JSON.stringify(spaces))
 
-          account.spaceIds.concat( spaces.resources.map((resource) => {
-            return resource.metadata.guid
-          }))
-          account.spaces.concat(spaces.resources.map((resource) => {
-            return resource.entity.name
-          }))
-          spaces_next_url = spaces.next_url
-        }
+        account.spaceIds = spaces.resources.map((resource) => {
+          return resource.metadata.guid
+        })
+
+        account.spaces = spaces.resources.map((resource) => {
+          return resource.entity.name
+        })
 
         // store user data in the cache
         await cache.set(credentials.session_id, { credentials, account }, 0)
