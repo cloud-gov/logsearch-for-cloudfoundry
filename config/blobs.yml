@@ -30,6 +30,9 @@ requests/requests-2.22.0.whl:
   size: 57952
   object_id: 2e48a6af-17cf-4a0c-5a47-b298ef16e853
   sha: sha256:9cf5292fcd0f598c671cfc1e0d7d1a7f13bb8085e9a590f48c010551dc6c4b31
+requests/urllib3-1.25.8.whl:
+  size: 125642
+  sha: sha256:2f3db8b19923a873b3e5256dc9c2dedfa883e33d87c690d9c7913e1f40673cdc
 ruby/rake-12.3.2.gem:
   size: 87040
   object_id: eb36ff1c-24a2-4291-605c-96f37985481f
