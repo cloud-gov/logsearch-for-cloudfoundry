@@ -1,0 +1,8 @@
+---
+name: upload-kibana-objects-python3
+
+dependencies:
+- python3
+
+files:
+- requests/*

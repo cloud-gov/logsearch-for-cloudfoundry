@@ -5,6 +5,8 @@ description: This job uploads Kibana saved objects (index-patterns, searches, vi
 
 packages:
 - ruby-2.4.6-r0.16.0
+- python3
+- upload-kibana-objects-python3
 
 consumes:
 - name: elasticsearch
