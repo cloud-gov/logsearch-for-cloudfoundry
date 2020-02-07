@@ -10,28 +10,25 @@ redis/redis-3.2.9.tar.gz:
   size: 1547695
   object_id: a1230536-4203-40b9-97e1-9f11d470308d
   sha: 8fad759f28bcb14b94254124d824f1f3ed7b6aa6
-request/urllib3-1.25.8.whl:
-  size: 125642
-  object_id: f049c5a4-5d06-45fb-7c76-455326004ef9
-  sha: sha256:2f3db8b19923a873b3e5256dc9c2dedfa883e33d87c690d9c7913e1f40673cdc
-requests/certifi-2019.11.28.whl:
+requests/certifi-2019.11.28-py2.py3-none-any.whl:
   size: 156030
-  object_id: 6fe9537e-c003-427e-77a6-e06e97a3558e
+  object_id: 26a907f0-c975-478e-46f2-fd178e510f3d
   sha: sha256:017c25db2a153ce562900032d5bc68e9f191e44e9a0f762f373977de9df1fbb3
-requests/chardet-3.0.4.whl:
+requests/chardet-3.0.4-py2.py3-none-any.whl:
   size: 133356
-  object_id: a05da880-3a49-414c-4d36-8dad9fd792e2
+  object_id: 51ef32df-8fa2-4460-5278-dac9c2125118
   sha: sha256:fc323ffcaeaed0e0a02bf4d117757b98aed530d9ed4531e3e15460124c106691
-requests/idna-2.8.whl:
+requests/idna-2.8-py2.py3-none-any.whl:
   size: 58594
-  object_id: 617e3848-23da-4939-5ae6-7fbddcc5c410
+  object_id: bbc5a76d-882a-4279-6c3a-722642885fd9
   sha: sha256:ea8b7f6188e6fa117537c3df7da9fc686d485087abf6ac197f9c46432f7e4a3c
-requests/requests-2.22.0.whl:
+requests/requests-2.22.0-py2.py3-none-any.whl:
   size: 57952
-  object_id: 2e48a6af-17cf-4a0c-5a47-b298ef16e853
+  object_id: 45e6e327-b6a7-462f-46ef-567cef18358f
   sha: sha256:9cf5292fcd0f598c671cfc1e0d7d1a7f13bb8085e9a590f48c010551dc6c4b31
-requests/urllib3-1.25.8.whl:
+requests/urllib3-1.25.8-py2.py3-none-any.whl:
   size: 125642
+  object_id: c8ec5584-0428-4c10-5f42-df0392db3985
   sha: sha256:2f3db8b19923a873b3e5256dc9c2dedfa883e33d87c690d9c7913e1f40673cdc
 ruby/rake-12.3.2.gem:
   size: 87040
