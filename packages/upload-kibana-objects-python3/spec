@@ -1,5 +1,11 @@
 ---
+# this package installs all the requirements of the upload-kibana-objects
+# into a python virtual environment. 
+#
+# To update this run `python3 -m pip download requests` then bosh add-blob each of the wheels
+
 name: upload-kibana-objects-python3
+
 
 dependencies:
 - python3
