@@ -2,4 +2,4 @@ set -e
 
 ${BOSH_INSTALL_TARGET}/../python3/bin/python3 -m venv ${BOSH_INSTALL_TARGET}
 
-${BOSH_INSTALL_TARGET}/bin/python3 -m pip install --no-index requests/requests-2.22.0.whl
+${BOSH_INSTALL_TARGET}/bin/python3 -m pip install --no-index requests/*.whl
