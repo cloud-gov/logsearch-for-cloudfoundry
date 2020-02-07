@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/var/vcap/packages/upload-kibana-objects-python3/bin/python3
 
 <%
   system_domain = nil
