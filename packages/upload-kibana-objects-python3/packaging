@@ -2,4 +2,4 @@ set -e
 
 /var/vcap/packages/python3/bin/python3 -m venv --copies ${BOSH_INSTALL_TARGET}/venv
 
-${BOSH_INSTALL_TARGET}/bin/python3 -m pip install --no-index requests/*.whl
+${BOSH_INSTALL_TARGET}/bin/venv/python3 -m pip install --no-index requests/*.whl
