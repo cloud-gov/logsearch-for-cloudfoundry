@@ -14,7 +14,7 @@ keyword_default = { "type": "keyword", "index": true }.to_json
 full_text_with_raw_copy = {
   "type": "text",
   "index": true,
-  "norms": false,
+  "norms": { "enabled": false },
   "fields": {
     "raw": {
       "type": "keyword",
