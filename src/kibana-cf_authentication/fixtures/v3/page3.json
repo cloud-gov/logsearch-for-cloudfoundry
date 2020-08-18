@@ -1,0 +1,15 @@
+{
+  "pagination": {
+    "next": null
+  },
+  "resources": [{
+    "guid": "page2guid1",
+    "name": "page2name1"
+  }, {
+    "guid": "page2guid2",
+    "name": "page2name2"
+  }, {
+    "guid": "page2guid3",
+    "name": "page2name3"
+  }]
+}

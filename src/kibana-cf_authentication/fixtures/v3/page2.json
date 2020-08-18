@@ -1,0 +1,21 @@
+{
+  "pagination": {
+    "next": { "href": "http://localhost:8080/v3/page3.json" }
+  },
+  "resources": [{
+    "guid": "page2guid1",
+    "name": "page2name1"
+  }, {
+    "guid": "page2guid2",
+    "name": "page2name2"
+  }, {
+    "guid": "page2guid3",
+    "name": "page2name3"
+  }, {
+    "guid": "page2guid4",
+    "name": "page2name4"
+  }, {
+    "guid": "page2guid5",
+    "name": "page2name5"
+  }]
+}
