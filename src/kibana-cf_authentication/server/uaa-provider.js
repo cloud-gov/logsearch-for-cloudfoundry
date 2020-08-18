@@ -27,6 +27,7 @@ module.exports = (server, config, cache) => {
 
       try {
         const profile = await get(config.get('authentication.account_info_uri'))
+        const apiUri = config.get('authentication.api_uri')
 
         server.log(['debug', 'authentication'], JSON.stringify({ profile }))
 
@@ -39,20 +40,20 @@ module.exports = (server, config, cache) => {
         }
 
         // CF V2 API
-        const orgs = await uaaPaginatorV2(get, config.get('authentication.api_uri'), '/v2/organizations');
-        server.log(['debug', 'authentication', 'orgs'], JSON.stringify(orgs));
+        const orgs = await uaaPaginatorV2(get, apiUri, '/v2/organizations')
+        server.log(['debug', 'authentication', 'orgs'], JSON.stringify(orgs))
 
-        const spaces = await uaaPaginatorV2(get, config.get('authentication.api_uri'), '/v2/spaces');
+        const spaces = await uaaPaginatorV2(get, apiUri, '/v2/spaces')
         server.log(['debug', 'authentication', 'spaces'], JSON.stringify(spaces))
 
         // CF V3 API - Commented out for later use
-        // const orgs = await uaaPaginatorV3(get, config.get('authentication.organizations_uri'));
-        // const spaces = await uaaPaginatorV3(get, config.get('authentication.spaces_uri'));
+        // const orgs = await uaaPaginatorV3(get, `${apiUri}/v3/organizations`);
+        // const spaces = await uaaPaginatorV3(get, `${apiUri}/v3/spaces`);
 
-        account.orgIds = orgs.map(org => org.guid);
-        account.orgs = orgs.map(org => org.name);
-        account.spaceIds = spaces.map(space => space.guid);
-        account.spaces = spaces.map(space => space.name);
+        account.orgIds = orgs.map(org => org.guid)
+        account.orgs = orgs.map(org => org.name)
+        account.spaceIds = spaces.map(space => space.guid)
+        account.spaces = spaces.map(space => space.name)
 
         // store user data in the cache
         await cache.set(credentials.session_id, { credentials, account }, 0)
