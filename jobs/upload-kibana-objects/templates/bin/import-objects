@@ -35,7 +35,7 @@ if __name__ == "__main__":
             'X-Uaa-Csrf': logs.cookies['X-Uaa-Csrf'],
         },
     )
-    assert login.url == 'https://<%= logs_hostname %>.<%= system_domain %>/app/kibana', login.url
+    assert login.url == 'https://<%= logs_hostname %>.<%= system_domain %>/app/home', login.url
     assert login.status_code == 200, login.status_code
 
     for filename in glob.iglob('/var/vcap/jobs/upload-kibana-objects/kibana-objects/**/*.json', recursive=True):
