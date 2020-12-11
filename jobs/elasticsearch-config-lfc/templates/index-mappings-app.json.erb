@@ -10,7 +10,7 @@ keyword_default = { "type": "keyword", "index": true }.to_json
 
 %>
 {
-  "index_templates" : ["<%= p('elasticsearch_config.app_index_prefix') %>*"],
+  "index_patterns" : ["<%= p('elasticsearch_config.app_index_prefix') %>*"],
   "priority": 203,
   "template": {
     "settings": <%= p('elasticsearch_config.app_index_settings', {}).to_json %>,

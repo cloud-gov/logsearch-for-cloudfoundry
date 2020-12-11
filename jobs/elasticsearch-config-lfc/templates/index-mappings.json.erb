@@ -27,7 +27,7 @@ full_text_with_raw_copy = {
 
 %>
 {
-  "index_templates" : ["<%= p('elasticsearch_config.index_prefix') %>*"],
+  "index_patterns" : ["<%= p('elasticsearch_config.index_prefix') %>*"],
   "priority": 202,
   "template": {
     "settings": <%= p('elasticsearch_config.index_settings', {}).to_json %>,
