@@ -238,7 +238,7 @@ module.exports = (server, config, cache) => {
     },
     {
       method: 'POST',
-      path: '/_filtered_suggestions',
+      path: '/{index}/_filtered_suggestions',
       config: {
         payload: {
           parse: false
