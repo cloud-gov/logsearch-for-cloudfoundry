@@ -16,7 +16,7 @@ const ensureKeys = (value, keys) => {
 
 const filterSuggestionQuery = (payload, cached) => {
   // query for /api/kibana/suggestions/values/<index name> endpoints after kibana 7.7
-  let boolFilter = ensureKeys(payload, ['boolFilter'])
+  let boolFilter = payload.boolFilter || []
 
   boolFilter.push(
     {'bool':
@@ -27,6 +27,7 @@ const filterSuggestionQuery = (payload, cached) => {
       }
     }
   )
+  payload.boolFilter = boolFilter
   return payload
 }
 
