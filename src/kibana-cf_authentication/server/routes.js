@@ -290,6 +290,65 @@ module.exports = (server, config, cache) => {
           }
         }
       }
+    },
+    {
+      method: 'POST',
+      path: '/_filtered_capabilities',
+      config: {
+        payload: {
+          parse: false
+        },
+        validate: { payload: null },
+        handler: async (request, h) => {
+          const options = {
+            method: 'POST',
+            url: '/api/core/capabilities',
+            artifacts: true
+          };
+          const cached = await cache.get(request.auth.credentials.session_id)
+
+          options.headers = request.headers
+          options.payload = request.payload
+
+          delete options.headers.host
+          delete options.headers['user-agent']
+          delete options.headers['accept-encoding']
+          options.headers['content-length'] = options.payload.length
+
+          const resp = await server.inject(options)
+
+          const caps = JSON.parse(resp.payload)
+          if (cached.account.orgs.indexOf(config.get('authentication.cf_system_org')) === -1 && !(config.get('authentication.skip_authorization'))) {
+            // settings, etc, that we don't want users poking around in
+            caps.navLinks.management = false
+            caps.navLinks.dev_tools = false
+            caps.navLinks.ingestManager = false
+          }
+
+          // features we can't/don't want to use
+          caps.navLinks.apm = false
+          caps.navLinks.securitySolution = false
+          caps.navLinks.siem = false
+          caps.navLinks.uptime = false
+          caps.navLinks.appSearch = false
+          caps.navLinks.workplaceSearch = false
+          caps.navLinks["securitySolution:overview"] = false
+          caps.navLinks["securitySolution:detections"] = false
+          caps.navLinks["securitySolution:hosts"] = false
+          caps.navLinks["securitySolution:network"] = false
+          caps.navLinks["securitySolution:timelines"] = false
+          caps.navLinks["securitySolution:case"] = false
+          caps.navLinks["securitySolution:administration"] = false
+
+          const response = h.response()
+
+          response.code(resp.statusCode)
+          response.type(resp.headers['content-type'])
+
+          return JSON.stringify(caps)
+
+        }
+      }
     }
   ]
 }

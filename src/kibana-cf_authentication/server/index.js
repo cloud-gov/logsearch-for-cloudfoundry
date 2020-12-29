@@ -168,6 +168,8 @@ module.exports = (kibana) => {
           } else if (/api\/kibana\/suggestions\/values/.test(request.path) && !request.auth.artifacts) {
             const match = /api\/kibana\/suggestions\/values\/([^\/]+)/.exec(request.path)
             request.setUrl('/' + match[1] + '/_filtered_suggestions')
+          } else if (/api\/core\/capabilities/.test(request.path) && !request.auth.artifacts) {
+            request.setUrl('/_filtered_capabilities')
           } else {
             const match = /elasticsearch\/([^\/]+)\/_search/.exec(request.path)
 
