@@ -323,6 +323,9 @@ module.exports = (server, config, cache) => {
             caps.navLinks.management = false
             caps.navLinks.dev_tools = false
             caps.navLinks.ingestManager = false
+            caps.management.kibana.settings = false
+            caps.management.kibana.indexPatterns = false
+            caps.management.kibana.objects = false
           }
 
           // features we can't/don't want to use
@@ -339,6 +342,54 @@ module.exports = (server, config, cache) => {
           caps.navLinks["securitySolution:timelines"] = false
           caps.navLinks["securitySolution:case"] = false
           caps.navLinks["securitySolution:administration"] = false
+
+          caps.catalogue.console = false
+          caps.catalogue.advanced_settings = false
+          caps.catalogue.indexPatterns = false
+          caps.catalogue.appSearch = false
+          caps.catalogue.workplaceSearch = false
+          caps.catalogue.apm = false
+          caps.catalogue.uptime = false
+          caps.catalogue.securitySolution = false
+          caps.catalogue.searchprofiler = false
+          caps.catalogue.grokdebugger = false
+          caps.catalogue.saved_objects = false
+
+          caps.ingestManager.show = false
+          caps.ingestManager.read = false
+          caps.ingestManager.write = false
+
+          caps.apm.show = false
+          caps.apm.save = false
+          caps.apm['alerting:show'] = false
+          caps.apm['actions:show'] = false
+          caps.apm['alerting:save'] = false
+          caps.apm['actions:save'] = false
+          caps.apm['alerting:delete'] = false
+          caps.apm['actions:delete'] = false
+
+          caps.uptime.save = false
+          caps.uptime.configureSettings = false
+          caps.uptime.show = false
+          caps.uptime['alerting:show'] = false
+          caps.uptime['actions:show'] = false
+          caps.uptime['alerting:save'] = false
+          caps.uptime['actions:save'] = false
+          caps.uptime['alerting:delete'] = false
+          caps.uptime['actions:delete'] = false
+
+          
+          caps.siem.save = false
+          caps.siem.crud = false
+          caps.siem['alerting:show'] = false
+          caps.siem['actions:show'] = false
+          caps.siem['alerting:save'] = false
+          caps.siem['actions:save'] = false
+          caps.siem['alerting:delete'] = false
+          caps.siem['actions:delete'] = false
+
+          caps.dev_tools.show = false
+          caps.dev_tools.save = false
 
           const response = h.response()
 
