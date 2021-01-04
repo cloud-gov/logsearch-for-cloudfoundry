@@ -33,5 +33,8 @@
     "grunt-clean": "^0.4.0",
     "grunt-less": "^0.1.7"
   },
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "scripts": {
+    "test": "npx jest"
+  }
 }
