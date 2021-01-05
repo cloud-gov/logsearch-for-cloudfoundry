@@ -320,12 +320,33 @@ module.exports = (server, config, cache) => {
           const caps = JSON.parse(resp.payload)
           if (cached.account.orgs.indexOf(config.get('authentication.cf_system_org')) === -1 && !(config.get('authentication.skip_authorization'))) {
             // settings, etc, that we don't want users poking around in
-            caps.navLinks.management = false
             caps.navLinks.dev_tools = false
             caps.navLinks.ingestManager = false
             caps.management.kibana.settings = false
             caps.management.kibana.indexPatterns = false
-            caps.management.kibana.objects = false
+
+            caps.indexPatterns.save = false
+
+            caps.advancedSettings.show = false
+            caps.advancedSettings.save = false
+
+            caps.management.data = {}
+            caps.management.data.index_management = false
+            caps.management.data.index_lifecycle_management = false
+            caps.management.data.snapshot_restore = false
+            caps.management.data.rollup_jobs = false
+            caps.management.data.transform = false
+            caps.management.data.remote_clusters = false
+
+            caps.management.ingest = {}
+            caps.management.ingest.ingest_pipelines = false
+
+            caps.management.insightsAndAlerting = {}
+            caps.management.insightsAndAlerting.reporting = false
+
+            caps.management.stack = {}
+            caps.management.stack.license_management = false
+            caps.management.stack.upgrade_assistant = false
           }
 
           // features we can't/don't want to use
@@ -378,7 +399,6 @@ module.exports = (server, config, cache) => {
           caps.uptime['alerting:delete'] = false
           caps.uptime['actions:delete'] = false
 
-          
           caps.siem.save = false
           caps.siem.crud = false
           caps.siem['alerting:show'] = false
