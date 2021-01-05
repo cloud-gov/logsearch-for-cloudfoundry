@@ -18,7 +18,3 @@ test('does not mess with siblings', () => {
     expect(ensureKeys(obj, ['foo','bar','baz'])).toBe(obj.foo.bar.baz);
     expect(obj).toEqual({'foo': {'quux': {}, 'bar':{'baz':{}}}});
 })
-
-test('failed tests break ci', () => {
-    expect(false).toEqual(true);
-})
