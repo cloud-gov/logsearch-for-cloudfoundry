@@ -3,3 +3,8 @@ name: kibana-auth-plugin
 
 files:
   - kibana-cf_authentication/**/*
+
+excluded_files:
+  - kibana-cf_authentication/**/*.test.js
+  - kibana-cf_authentication/README.md
+  - kibana-cf_authentication/jest.config.js

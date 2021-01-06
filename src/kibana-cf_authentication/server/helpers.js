@@ -14,6 +14,23 @@ const ensureKeys = (value, keys) => {
   return value
 }
 
+const filterSuggestionQuery = (payload, cached) => {
+  // query for /api/kibana/suggestions/values/<index name> endpoints after kibana 7.7
+  let boolFilter = payload.boolFilter || []
+
+  boolFilter.push(
+    {'bool':
+      {'must': [
+        { 'terms': { '@cf.space_id': cached.account.spaceIds } },
+        { 'terms': { '@cf.org_id': cached.account.orgIds } }
+        ]
+      }
+    }
+  )
+  payload.boolFilter = boolFilter
+  return payload
+}
+
 const filterInternalQuery = (payload, cached) => {
   // query for /internal/search/es endpoints after kibana 7.7
   let bool = ensureKeys(payload, ['params', 'body', 'query', 'bool'])
@@ -79,8 +96,10 @@ const uaaPaginatorV3 = async (get, url, values = []) => {
 }
 
 module.exports = {
+  ensureKeys,
   filterQuery,
   filterInternalQuery,
+  filterSuggestionQuery,
   uaaPaginatorV2,
   uaaPaginatorV3
 }
