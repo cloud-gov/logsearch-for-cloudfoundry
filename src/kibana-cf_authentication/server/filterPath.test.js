@@ -1,33 +1,40 @@
-const each = require("jest-each").default
-const {filterPath} = require('./helpers')
+const {filterPath} = require('./helpers');
 
-const spy = jest.spyOn(console, 'log');
+describe('filterPath', () => {
+    let spy;
 
-describe('unknown endpoints', () => {
-
-    afterEach(() => {
-        expect(spy).toHaveBeenCalled()
+    beforeEach(() => {
+        spy = jest.spyOn(console, 'log')
     });
 
-    test('bar passes through filter', () => {
-        expect(filterPath('/bar/')).toEqual('/bar/')
-    });
-});
+    afterEach(() => spy.mockRestore());
 
-describe('known endpoints', () => {
-    afterEach(() => {
-        expect(spy).not.toHaveBeenCalled()
+    describe('unknown endpoints', () => {
+        test('bar passes through filter', () => {
+            expect(filterPath('/bar/')).toEqual('/bar/')
+            expect(spy).toHaveBeenCalledTimes(1)
+        });
     });
-    each([
-        'bundles/app/core/bootstrap.js',
-        '2134/bundles/app/core/bootstrap.js',
-    ]).it("allows %s without logging",  (path) => {
-        expect(filterPath(path)).toEqual(path)
-    });
-    each([
-        'app/dev_tools',
-        'app/./././././dev_tools'
-    ]).it("blocks %s without logging", (path) => {
-        expect(filterPath(path)).toEqual('/401')
+
+    describe('known endpoints', () => {
+        it("allows %s without logging",  () => {
+            const paths = [
+                'bundles/app/core/bootstrap.js',
+                '2134/bundles/app/core/bootstrap.js',
+            ];
+
+            paths.map(path => expect(filterPath(path)).toEqual(path));
+            expect(spy).not.toHaveBeenCalled();
+        });
+
+        it("blocks %s without logging", () => {
+            const paths = [
+                'app/dev_tools',
+                'app/./././././dev_tools'
+            ];
+
+            paths.map(path => expect(filterPath(path)).toEqual('/401'));
+            expect(spy).not.toHaveBeenCalled();
+        });
     });
 });
