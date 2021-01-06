@@ -31,7 +31,9 @@
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-clean": "^0.4.0",
-    "grunt-less": "^0.1.7"
+    "grunt-less": "^0.1.7",
+    "jest": "*",
+    "jest-each": "*"
   },
   "license": "Apache-2.0",
   "scripts": {

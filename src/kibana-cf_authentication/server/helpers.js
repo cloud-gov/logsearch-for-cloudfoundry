@@ -63,9 +63,66 @@ const filterQuery = (payload, cached) => {
   return payload
 }
 
+const filterPath = (path, server=console) => {
+  /*
+  Strategy:
+  check if the url is blocked. If it is, redirect to the blocked endpoint.
+  then check if it's explicitly allowed, and return it unchanged if so.
+  Finally, if it's neither blocked nor allowed, log and allow.
+
+  */
+
+  // todo: normalize urls
+
+  const blocked = "/401"
+  // These should probably always be anchored with ^ and $
+  const allowlist = [
+    /^\/?ui\//,
+    /^\/?(\d+\/)?bundles/,
+    /^\/?app\/home/,
+    /^\/?api\/core\/capabilities/,
+    /^\/?api\/index_patterns\/_fields_for_wildcard/,
+    /^\/?api\/kibana\/management\/saved_objects\/_allowed_types/,
+    /^\/?api\/kibana\/management\/saved_objects\/_find/,
+    /^\/?api\/kibana\/management\/saved_objects\/scroll\/counts/,
+    /^\/?api\/licensing\/info/,
+    /^\/?api\/saved_objects\/_bulk_get/,
+    /^\/?api\/saved_objects\/_find/,
+    /^\/?translations/,
+    /^\/?internal\/search/,
+    /^\/?login/,
+    /^\/?oauth\/authorize/,
+    /^\/?plugins\/authenication/,
+    /^\/?node_modules/,
+  ]
+  const denylist = [
+    /^\/?indexPatterns/,
+    /^\/?advancedSettings/,
+    /^\/?management\/data\//,
+    /^\/?management\/ingest\//,
+    /^\/?management\/insightsAndAlerting\//,
+    /^\/?management\/stack\/license_management/,
+    /^\/?app\/dev_tools/,
+  ]
+
+  for (denied of denylist) {
+    if (denied.test(path)) {
+      return blocked
+    }
+  }
+  for (allowed of allowlist) {
+    if (allowed.test(path)) {
+      return path
+    }
+  }
+  server.log(["warn", "authentication", "helpers:filterUrl"], `unknown url allowed: ${path}`)
+  return path
+}
+
 module.exports = {
   ensureKeys,
   filterQuery,
   filterInternalQuery,
-  filterSuggestionQuery
+  filterSuggestionQuery,
+  filterPath
 }
