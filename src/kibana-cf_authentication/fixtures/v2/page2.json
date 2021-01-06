@@ -1,0 +1,19 @@
+{
+  "next_url": "/v2/page3.json",
+  "resources": [{
+    "metadata": { "guid": "page2guid1"},
+    "entity": { "name": "page2name1"}
+  }, {
+    "metadata": { "guid": "page2guid2"},
+    "entity": { "name": "page2name2"}
+  }, {
+    "metadata": { "guid": "page2guid3"},
+    "entity": { "name": "page2name3"}
+  }, {
+    "metadata": { "guid": "page2guid4"},
+    "entity": { "name": "page2name4"}
+  }, {
+    "metadata": { "guid": "page2guid5"},
+    "entity": { "name": "page2name5"}
+  }]
+}

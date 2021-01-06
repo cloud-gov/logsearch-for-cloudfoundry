@@ -67,6 +67,7 @@ module.exports = async (Joi) => {
         ((logoutRedirectUri !== '') ? '?redirect=' + logoutRedirectUri : '')),
       token_uri: Joi.string().default(cfInfo.token_endpoint + '/oauth/token'),
       account_info_uri: Joi.string().default(cfInfo.token_endpoint + '/userinfo'),
+      api_uri: Joi.string().default(cloudFoundryApiUri),
       organizations_uri: Joi.string().default(cloudFoundryApiUri + '/v2/organizations'),
       spaces_uri: Joi.string().default(cloudFoundryApiUri + '/v2/spaces'),
       random_passphrase: Joi.string().default(randomString),
