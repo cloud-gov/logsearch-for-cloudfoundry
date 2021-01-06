@@ -1,4 +1,5 @@
 const uuid = require('uuid')
+const { uaaPaginatorV2, uaaPaginatorV3 } = require('./helpers');
 
 module.exports = (server, config, cache) => {
   const uaaProvider = {
@@ -26,6 +27,7 @@ module.exports = (server, config, cache) => {
 
       try {
         const profile = await get(config.get('authentication.account_info_uri'))
+        const apiUri = config.get('authentication.api_uri')
 
         server.log(['debug', 'authentication'], JSON.stringify({ profile }))
 
@@ -37,30 +39,24 @@ module.exports = (server, config, cache) => {
           raw: profile
         }
 
-        // get user orgs
-        const orgs = await get(config.get('authentication.organizations_uri'), {"results-per-page": 100})
+        // CF V2 API
+        // const orgs = await uaaPaginatorV2(get, apiUri, '/v2/organizations')
+        // server.log(['debug', 'authentication', 'orgs'], JSON.stringify(orgs))
 
-        server.log(['debug', 'authentication', 'orgs'], JSON.stringify(orgs))
+        // const spaces = await uaaPaginatorV2(get, apiUri, '/v2/spaces')
+        // server.log(['debug', 'authentication', 'spaces'], JSON.stringify(spaces))
 
-        account.orgIds = orgs.resources.map((resource) => {
-          return resource.metadata.guid
-        })
-        account.orgs = orgs.resources.map((resource) => {
-          return resource.entity.name
-        })
+        // CF V3 API - Commented out for later use
+        const orgs = await uaaPaginatorV3(get, `${apiUri}/v3/organizations`);
+        server.log(['debug', 'authentication', 'orgs'], JSON.stringify(orgs));
 
-        // get user spaces
-        const spaces = await get(config.get('authentication.spaces_uri'), {"results-per-page": 100})
+        const spaces = await uaaPaginatorV3(get, `${apiUri}/v3/spaces`);
+        server.log(['debug', 'authentication', 'spaces'], JSON.stringify(spaces));
 
-        server.log(['debug', 'authentication', 'spaces'], JSON.stringify(spaces))
-
-        account.spaceIds = spaces.resources.map((resource) => {
-          return resource.metadata.guid
-        })
-
-        account.spaces = spaces.resources.map((resource) => {
-          return resource.entity.name
-        })
+        account.orgIds = orgs.map(org => org.guid)
+        account.orgs = orgs.map(org => org.name)
+        account.spaceIds = spaces.map(space => space.guid)
+        account.spaces = spaces.map(space => space.name)
 
         // store user data in the cache
         await cache.set(credentials.session_id, { credentials, account }, 0)
