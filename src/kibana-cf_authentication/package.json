@@ -6,10 +6,6 @@
     "type": "git",
     "url": "https://github.com/cloudfoundry-community/logsearch-for-cloudfoundry.git"
   },
-  "scripts": {
-    "serve": "npx serve -l 8080 fixtures",
-    "test": "npx jest test.js"
-  },
   "dependencies": {
     "ansi-regex": "^2.0.0",
     "array-uniq": "^1.0.2",
