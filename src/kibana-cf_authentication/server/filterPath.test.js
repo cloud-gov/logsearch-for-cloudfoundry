@@ -25,7 +25,8 @@ describe('known endpoints', () => {
         expect(filterPath(path)).toEqual(path)
     });
     each([
-        'app/dev_tools'
+        'app/dev_tools',
+        'app/./././././dev_tools'
     ]).it("blocks %s without logging", (path) => {
         expect(filterPath(path)).toEqual('/401')
     });

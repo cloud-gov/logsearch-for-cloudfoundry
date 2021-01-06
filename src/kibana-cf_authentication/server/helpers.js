@@ -1,3 +1,5 @@
+const path = require('path')
+
 const isObject = (value) => {
   return value instanceof Object && !(value instanceof Array)
 }
@@ -63,19 +65,17 @@ const filterQuery = (payload, cached) => {
   return payload
 }
 
-const filterPath = (path, server=console) => {
+const filterPath = (requestPath, server=console) => {
   /*
   Strategy:
   check if the url is blocked. If it is, redirect to the blocked endpoint.
   then check if it's explicitly allowed, and return it unchanged if so.
   Finally, if it's neither blocked nor allowed, log and allow.
-
   */
 
-  // todo: normalize urls
-
+  const normalized = path.normalize(requestPath)
   const blocked = "/401"
-  // These should probably always be anchored with ^ and $
+  // These should probably always be anchored with ^
   const allowlist = [
     /^\/?ui\//,
     /^\/?(\d+\/)?bundles/,
@@ -106,17 +106,17 @@ const filterPath = (path, server=console) => {
   ]
 
   for (denied of denylist) {
-    if (denied.test(path)) {
+    if (denied.test(normalized)) {
       return blocked
     }
   }
   for (allowed of allowlist) {
-    if (allowed.test(path)) {
-      return path
+    if (allowed.test(normalized)) {
+      return requestPath
     }
   }
-  server.log(["warn", "authentication", "helpers:filterUrl"], `unknown url allowed: ${path}`)
-  return path
+  server.log(["warn", "authentication", "helpers:filterUrl"], `unknown url allowed: ${requestPath} (normalized to ${normalized})`)
+  return requestPath
 }
 
 module.exports = {
