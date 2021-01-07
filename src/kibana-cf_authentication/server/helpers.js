@@ -1,3 +1,5 @@
+const path = require('path')
+
 const isObject = (value) => {
   return value instanceof Object && !(value instanceof Array)
 }
@@ -63,7 +65,60 @@ const filterQuery = (payload, cached) => {
   return payload
 }
 
-const uaaPaginatorV2 = async (get, baseUrl, path, values = []) => {
+const filterPath = (requestPath, server=console) => {
+  /*
+  Strategy:
+  check if the url is blocked. If it is, redirect to the blocked endpoint.
+  then check if it's explicitly allowed, and return it unchanged if so.
+  Finally, if it's neither blocked nor allowed, log and allow.
+  */
+
+  const normalized = path.normalize(requestPath)
+  const blocked = "/401"
+  // These should probably always be anchored with ^
+  const allowlist = [
+    /^\/?ui\//,
+    /^\/?(\d+\/)?bundles/,
+    /^\/?app\/home/,
+    /^\/?api\/core\/capabilities/,
+    /^\/?api\/index_patterns\/_fields_for_wildcard/,
+    /^\/?api\/kibana\/management\/saved_objects\/_allowed_types/,
+    /^\/?api\/kibana\/management\/saved_objects\/_find/,
+    /^\/?api\/kibana\/management\/saved_objects\/scroll\/counts/,
+    /^\/?api\/licensing\/info/,
+    /^\/?api\/saved_objects\/_bulk_get/,
+    /^\/?api\/saved_objects\/_find/,
+    /^\/?translations/,
+    /^\/?internal\/search/,
+    /^\/?login/,
+    /^\/?oauth\/authorize/,
+    /^\/?plugins\/authenication/,
+    /^\/?node_modules/,
+  ]
+  const denylist = [
+    /^\/?indexPatterns/,
+    /^\/?advancedSettings/,
+    /^\/?management\/data\//,
+    /^\/?management\/ingest\//,
+    /^\/?management\/insightsAndAlerting\//,
+    /^\/?management\/stack\/license_management/,
+    /^\/?app\/dev_tools/,
+  ]
+
+  for (denied of denylist) {
+    if (denied.test(normalized)) {
+      return blocked
+    }
+  }
+  for (allowed of allowlist) {
+    if (allowed.test(normalized)) {
+      return requestPath
+    }
+  }
+  server.log(["warn", "authentication", "helpers:filterUrl"], `unknown url allowed: ${requestPath} (normalized to ${normalized})`)
+  return requestPath
+
+ const uaaPaginatorV2 = async (get, baseUrl, path, values = []) => {
   // CF API V2
   const response = await get(`${baseUrl}${path}`, { 'results-per-page': 100 })
 
@@ -100,6 +155,7 @@ module.exports = {
   filterQuery,
   filterInternalQuery,
   filterSuggestionQuery,
+  filterPath,
   uaaPaginatorV2,
   uaaPaginatorV3
 }

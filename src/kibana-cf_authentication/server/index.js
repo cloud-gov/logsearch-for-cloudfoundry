@@ -5,6 +5,7 @@ const initConfig = require('./config')
 const initCache = require('./cache')
 const initUaaProvider = require('./uaa-provider')
 const initRoutes = require('./routes')
+const {filterPath} = require('./helpers')
 
 /*
  --------------------------
@@ -170,12 +171,12 @@ module.exports = (kibana) => {
             request.setUrl('/' + match[1] + '/_filtered_suggestions')
           } else if (/api\/core\/capabilities/.test(request.path) && !request.auth.artifacts) {
             request.setUrl('/_filtered_capabilities')
-          } else {
+          } else if (/elasticsearch\/([^\/]+)\/_search/.test(request.path)) {
             const match = /elasticsearch\/([^\/]+)\/_search/.exec(request.path)
+            request.setUrl('/' + match[1] + '/_filtered_search')
+          } else {
+            request.setUrl(filterPath(request.path, server))
 
-            if (match !== null && !request.auth.artifacts) {
-              request.setUrl('/' + match[1] + '/_filtered_search')
-            }
           }
 
           return reply.continue
