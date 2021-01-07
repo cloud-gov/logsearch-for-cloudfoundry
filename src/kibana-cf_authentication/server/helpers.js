@@ -65,16 +65,15 @@ const filterQuery = (payload, cached) => {
   return payload
 }
 
-const filterPath = (requestPath, server=console) => {
+const pathAllowed = (requestPath, server=console) => {
   /*
   Strategy:
-  check if the url is blocked. If it is, redirect to the blocked endpoint.
-  then check if it's explicitly allowed, and return it unchanged if so.
-  Finally, if it's neither blocked nor allowed, log and allow.
+  check if the url is blocked. If it is, return false.
+  then check if it's explicitly allowed, and return true.
+  Finally, if it's neither blocked nor allowed, log and return true.
   */
 
   const normalized = path.normalize(requestPath)
-  const blocked = "/401"
   // These should probably always be anchored with ^
   const allowlist = [
     /^\/?ui\//,
@@ -107,16 +106,16 @@ const filterPath = (requestPath, server=console) => {
 
   for (const denied of denylist) {
     if (denied.test(normalized)) {
-      return blocked
+      return false
     }
   }
   for (const allowed of allowlist) {
     if (allowed.test(normalized)) {
-      return requestPath
+      return true
     }
   }
   server.log(["warn", "authentication", "helpers:filterUrl"], `unknown url allowed: ${requestPath} (normalized to ${normalized})`)
-  return requestPath
+  return true
 }
 
  const uaaPaginatorV2 = async (get, baseUrl, path, values = []) => {
@@ -156,7 +155,7 @@ module.exports = {
   filterQuery,
   filterInternalQuery,
   filterSuggestionQuery,
-  filterPath,
+  pathAllowed,
   uaaPaginatorV2,
   uaaPaginatorV3
 }
