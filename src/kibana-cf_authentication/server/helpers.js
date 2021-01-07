@@ -105,12 +105,12 @@ const filterPath = (requestPath, server=console) => {
     /^\/?app\/dev_tools/,
   ]
 
-  for (denied of denylist) {
+  for (const denied of denylist) {
     if (denied.test(normalized)) {
       return blocked
     }
   }
-  for (allowed of allowlist) {
+  for (const allowed of allowlist) {
     if (allowed.test(normalized)) {
       return requestPath
     }
