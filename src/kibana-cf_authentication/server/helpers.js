@@ -117,6 +117,7 @@ const filterPath = (requestPath, server=console) => {
   }
   server.log(["warn", "authentication", "helpers:filterUrl"], `unknown url allowed: ${requestPath} (normalized to ${normalized})`)
   return requestPath
+}
 
  const uaaPaginatorV2 = async (get, baseUrl, path, values = []) => {
   // CF API V2
