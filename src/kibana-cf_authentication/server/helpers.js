@@ -95,13 +95,14 @@ const pathAllowed = (requestPath, server=console) => {
     /^\/?node_modules/,
   ]
   const denylist = [
-    /^\/?indexPatterns/,
-    /^\/?advancedSettings/,
-    /^\/?management\/data\//,
-    /^\/?management\/ingest\//,
-    /^\/?management\/insightsAndAlerting\//,
-    /^\/?management\/stack\/license_management/,
+    /^\/?app\/indexPatterns/,
+    /^\/?app\/advancedSettings/,
+    /^\/?app\/management\/data\//,
+    /^\/?app\/management\/ingest\//,
+    /^\/?app\/management\/insightsAndAlerting\//,
+    /^\/?app\/management\/stack\/license_management/,
     /^\/?app\/dev_tools/,
+    /^\/?api\/painless_lab/
   ]
 
   for (const denied of denylist) {
