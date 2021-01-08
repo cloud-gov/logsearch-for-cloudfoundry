@@ -420,6 +420,21 @@ module.exports = (server, config, cache) => {
 
         }
       }
+    },
+    {
+      method: '*',
+      path: '/401',
+      config: {
+        payload: {
+          parse: false
+        },
+        validate: { payload: null },
+        handler: async (request, h) => {
+          respose = h.response()
+          response.code(401)
+          return 'forbidden'
+        }
+      }
     }
   ]
 }
