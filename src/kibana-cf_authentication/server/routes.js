@@ -111,8 +111,9 @@ module.exports = (server, config, cache) => {
 
             const resp = await server.inject(options)
 
+            // note that `response` seems to never be used, and is probably being built incorrectly.
+            // we should remove this once we've got our testing to a level where we can validate it
             const response = h.response()
-
             response.code(resp.statusCode)
             response.type(resp.headers['content-type'])
             response.passThrough(true)
@@ -168,6 +169,8 @@ module.exports = (server, config, cache) => {
 
             const resp = await server.inject(options)
 
+            // note that `response` seems to never be used, and is probably being built incorrectly.
+            // we should remove this once we've got our testing to a level where we can validate it
             const response = h.response()
 
             response.code(resp.statusCode)
@@ -225,6 +228,8 @@ module.exports = (server, config, cache) => {
 
             const resp = await server.inject(options)
 
+            // note that `response` seems to never be used, and is probably being built incorrectly.
+            // we should remove this once we've got our testing to a level where we can validate it
             const response = h.response()
 
             response.code(resp.statusCode)
@@ -273,6 +278,8 @@ module.exports = (server, config, cache) => {
 
             const resp = await server.inject(options)
 
+            // note that `response` seems to never be used, and is probably being built incorrectly.
+            // we should remove this once we've got our testing to a level where we can validate it
             const response = h.response()
 
             if (resp.statusCode > 399) {
@@ -411,6 +418,8 @@ module.exports = (server, config, cache) => {
           caps.dev_tools.show = false
           caps.dev_tools.save = false
 
+          // note that `response` seems to never be used, and is probably being built incorrectly.
+          // we should remove this once we've got our testing to a level where we can validate it
           const response = h.response()
 
           response.code(resp.statusCode)
