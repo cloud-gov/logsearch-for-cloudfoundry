@@ -430,7 +430,7 @@ module.exports = (server, config, cache) => {
         },
         validate: { payload: null },
         handler: async (request, h) => {
-          respose = h.response()
+          let response = h.response()
           response.code(401)
           return 'forbidden'
         }
