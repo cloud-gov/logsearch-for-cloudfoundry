@@ -102,7 +102,8 @@ const pathAllowed = (requestPath, server=console) => {
     /^\/?app\/management\/insightsAndAlerting\//,
     /^\/?app\/management\/stack\/license_management/,
     /^\/?app\/dev_tools/,
-    /^\/?api\/painless_lab/
+    /^\/?api\/painless_lab/,
+    /^\/?api\/reporting/
   ]
 
   for (const denied of denylist) {
