@@ -174,6 +174,8 @@ module.exports = (kibana) => {
           } else if (/elasticsearch\/([^\/]+)\/_search/.test(request.path)) {
             const match = /elasticsearch\/([^\/]+)\/_search/.exec(request.path)
             request.setUrl('/' + match[1] + '/_filtered_search')
+          } else if (/api\/reporting\/generate\/csv/.test(request.path) && !request.auth.artifacts) {
+            request.setUrl('/_filtered_generated_csv')
           } else if (!pathAllowed(request.path, server)) {
             request.setUrl('/401')
           }

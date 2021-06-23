@@ -16,6 +16,22 @@ const ensureKeys = (value, keys) => {
   return value
 }
 
+const filterCSVReportingQuery = (payload, cached) => {
+  // query for /api/reporting/generate/csv/ endpoints after kibana 7.7
+  let bool = ensureKeys(payload, ['jobsParams', 'searchRequest', 'body', 'query', 'bool'])
+
+  bool.must = bool.must || []
+  // Note: the `must` clause may be an array or an object
+  if (isObject(bool.must)) {
+    bool.must = [bool.must]
+  }
+  bool.must.push(
+    { 'terms': { '@cf.space_id': cached.account.spaceIds } },
+    { 'terms': { '@cf.org_id': cached.account.orgIds } }
+  )
+  return payload
+}
+
 const filterSuggestionQuery = (payload, cached) => {
   // query for /api/kibana/suggestions/values/<index name> endpoints after kibana 7.7
   let boolFilter = payload.boolFilter || []
@@ -93,6 +109,7 @@ const pathAllowed = (requestPath, server=console) => {
     /^\/?oauth\/authorize/,
     /^\/?plugins\/authenication/,
     /^\/?node_modules/,
+    /^\/?api\/reporting\/generate\/csv/,
   ]
   const denylist = [
     /^\/?app\/indexPatterns/,
