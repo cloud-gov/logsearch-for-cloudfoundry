@@ -299,7 +299,7 @@ module.exports = (server, config, cache) => {
       }
     },
     {
-      method: 'GET',
+      method: 'POST',
       path: '/_filtered_generated_csv',
       config: {
         payload: {
@@ -308,7 +308,7 @@ module.exports = (server, config, cache) => {
         validate: { payload: null },
         handler: async (request, h) => {
           const options = {
-            method: 'GET',
+            method: 'POST',
             url: '/api/reporting/generate/csv?jobsParams=' + request.jobsParams,
             artifacts: true
           };
