@@ -299,6 +299,63 @@ module.exports = (server, config, cache) => {
       }
     },
     {
+      method: 'GET',
+      path: '/_filtered_generated_csv',
+      config: {
+        payload: {
+          parse: false
+        },
+        validate: { payload: null },
+        handler: async (request, h) => {
+          const options = {
+            method: 'GET',
+            url: '/api/reporting/generate/csv?jobsParams=' + request.jobsParams,
+            artifacts: true
+          };
+          let cached
+          try {
+            cached = await cache.get(request.auth.credentials.session_id)
+
+            if (cached.account.orgs.indexOf(config.get('authentication.cf_system_org')) === -1 && !(config.get('authentication.skip_authorization'))) {
+              let payload = JSON.parse(request.payload.toString() || '{}')
+              payload = filterCSVReportingQuery(payload, cached)
+              options.payload = new Buffer(JSON.stringify(payload))
+            } else {
+              options.payload = request.payload
+            }
+          } catch (error) {
+            server.log(['error', 'authentication', 'session:get:_filtered_generated_csv'], JSON.stringify(error))
+          } finally {
+            options.headers = request.headers
+
+            delete options.headers.host
+            delete options.headers['user-agent']
+            delete options.headers['accept-encoding']
+            options.headers['content-length'] = options.payload.length
+
+            const resp = await server.inject(options)
+
+            // note that `response` seems to never be used, and is probably being built incorrectly.
+            // we should remove this once we've got our testing to a level where we can validate it
+            const response = h.response()
+
+            if (resp.statusCode > 399) {
+              server.log(['error', 'authentication', 'session:get:_filtered_generated_csv'], resp.result)
+              response.code(200)
+              response.type("application/json")
+              return JSON.stringify([])
+            }
+
+            response.code(resp.statusCode)
+            response.type(resp.headers['content-type'])
+            response.passThrough(true)
+
+            return resp.result || resp.payload
+          }
+        }
+      }
+    },
+    {
       method: 'POST',
       path: '/_filtered_capabilities',
       config: {
