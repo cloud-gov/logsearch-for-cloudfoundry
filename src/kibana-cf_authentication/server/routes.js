@@ -331,7 +331,10 @@ module.exports = (server, config, cache) => {
             delete options.headers.host
             delete options.headers['user-agent']
             delete options.headers['accept-encoding']
-            options.headers['content-length'] = options.payload.length
+
+            options.headers['content-length'] = (options.payload && options.payload.length)
+              ? options.payload.length
+              : 0
 
             const resp = await server.inject(options)
 
