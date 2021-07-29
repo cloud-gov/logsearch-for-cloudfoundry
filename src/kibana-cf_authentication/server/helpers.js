@@ -1,4 +1,5 @@
 const path = require('path')
+const rison = require('rison-node')
 
 const isObject = (value) => {
   return value instanceof Object && !(value instanceof Array)
@@ -18,7 +19,11 @@ const ensureKeys = (value, keys) => {
 
 const filterCSVReportingQuery = (payload, cached) => {
   // query for /api/reporting/generate/csv/ endpoints after kibana 7.7
-  let bool = ensureKeys(payload, ['jobsParams', 'searchRequest', 'body', 'query', 'bool'])
+  // Requires Rison processing support to account for the jobsParams payload
+  // See https://www.elastic.co/guide/en/kibana/7.x/reporting-integration.html
+  let jobsParams = ensureKeys(payload, ['jobsParams'])
+  let decodedJobsParams = rison.decode(jobsParams)
+  let bool = ensureKeys(decodedJobsParams, ['searchRequest', 'body', 'query', 'bool'])
 
   bool.must = bool.must || []
   // Note: the `must` clause may be an array or an object
@@ -29,6 +34,8 @@ const filterCSVReportingQuery = (payload, cached) => {
     { 'terms': { '@cf.space_id': cached.account.spaceIds } },
     { 'terms': { '@cf.org_id': cached.account.orgIds } }
   )
+
+  payload.jobsParams = rison.encode(decodedJobsParams)
   return payload
 }
 
