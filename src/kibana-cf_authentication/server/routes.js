@@ -309,7 +309,7 @@ module.exports = (server, config, cache) => {
         handler: async (request, h) => {
           const options = {
             method: 'POST',
-            url: '/api/reporting/generate/csv?jobsParams=' + request.jobsParams,
+            url: '/api/reporting/generate/csv?jobParams=' + request.jobParams,
             artifacts: true
           };
           let cached
