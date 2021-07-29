@@ -35,7 +35,7 @@ const filterCSVReportingQuery = (payload, cached) => {
     { 'terms': { '@cf.org_id': cached.account.orgIds } }
   )
 
-  payload.jobParams = rison.encode(decodedJobsParams)
+  payload.jobParams = rison.encode(decodedJobParams)
   return payload
 }
 
