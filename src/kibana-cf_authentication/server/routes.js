@@ -1,3 +1,4 @@
+const rison = require('rison-node')
 const { filterQuery, filterInternalQuery, filterSuggestionQuery } = require('./helpers')
 
 module.exports = (server, config, cache) => {
@@ -309,7 +310,7 @@ module.exports = (server, config, cache) => {
         handler: async (request, h) => {
           const options = {
             method: 'POST',
-            url: '/api/reporting/generate/csv',
+            url: '/api/reporting/generate/csv?jobParams=' + request.payload,
             artifacts: true
           };
           let cached
@@ -317,8 +318,12 @@ module.exports = (server, config, cache) => {
             cached = await cache.get(request.auth.credentials.session_id)
 
             if (cached.account.orgs.indexOf(config.get('authentication.cf_system_org')) === -1 && !(config.get('authentication.skip_authorization'))) {
+              // Requires Rison processing support to account for the jobParams payload
+              // See https://www.elastic.co/guide/en/kibana/7.x/reporting-integration.html
               let payload = JSON.parse(request.payload.toString() || '{}')
-              payload = filterCSVReportingQuery(payload, cached)
+              let decodedJobParams = rison.decode(payload.jobParams)
+              let updatedJobParams = filterCSVReportingQuery(decodedJobParams, cached)
+              payload.jobParams = rison.encode(updatedJobParams)
               options.payload = new Buffer(JSON.stringify(payload))
             } else {
               options.payload = request.payload
