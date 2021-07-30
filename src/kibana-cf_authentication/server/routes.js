@@ -322,8 +322,8 @@ module.exports = (server, config, cache) => {
               // See https://www.elastic.co/guide/en/kibana/7.x/reporting-integration.html
               let payload = JSON.parse(request.payload.toString() || '{}')
               let decodedJobParams = rison.decode(payload.jobParams)
-              decodedJobParams = filterCSVReportingQuery(decodedJobParams, cached)
-              payload.jobParams = rison.encode(decodedJobParams)
+              let updatedJobParams = filterCSVReportingQuery(decodedJobParams, cached)
+              payload.jobParams = rison.encode(updatedJobParams)
               options.payload = new Buffer(JSON.stringify(payload))
             } else {
               options.payload = request.payload
