@@ -36,6 +36,7 @@ const filterCSVReportingQuery = (payload, cached) => {
   )
 
   jobParams = rison.encode(decodedJobParams)
+  payload.jobParams = jobParams
 
   return payload
 }
