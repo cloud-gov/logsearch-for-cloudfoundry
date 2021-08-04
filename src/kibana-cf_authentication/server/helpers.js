@@ -22,6 +22,11 @@ const filterCSVReportingQuery = (payload, cached) => {
   // Requires Rison processing support to account for the jobParams payload
   // See https://www.elastic.co/guide/en/kibana/7.x/reporting-integration.html
   let jobParams = ensureKeys(payload, ['jobParams'])
+
+  // TODO:  Remove these two lines once debugging is finished!
+  server.log(jobParams)
+  console.log(jobParams)
+
   let decodedJobParams = rison.decode(jobParams)
   let bool = ensureKeys(decodedJobParams, ['searchRequest', 'body', 'query', 'bool'])
 

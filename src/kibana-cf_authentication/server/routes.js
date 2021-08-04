@@ -318,8 +318,8 @@ module.exports = (server, config, cache) => {
             cached = await cache.get(request.auth.credentials.session_id)
 
             if (cached.account.orgs.indexOf(config.get('authentication.cf_system_org')) === -1 && !(config.get('authentication.skip_authorization'))) {
-              let payload = JSON.parse(request.payload.toString() || '{}')
-              payload = filterCSVReportingQuery(payload, cached)
+              let payloadJSON = JSON.parse(request.payload.toString() || '{}')
+              let payload = filterCSVReportingQuery(payloadJSON, cached)
               options.payload = new Buffer(JSON.stringify(payload))
             } else {
               options.payload = request.payload
