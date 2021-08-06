@@ -17,7 +17,7 @@ const ensureKeys = (value, keys) => {
   return value
 }
 
-const filterCSVReportingQuery = (payload, cached) => {
+const filterCSVReportingQuery = (payload, cached, server=console) => {
   // query for /api/reporting/generate/csv/ endpoints after kibana 7.7
   // Requires Rison processing support to account for the jobParams payload
   // See https://www.elastic.co/guide/en/kibana/7.x/reporting-integration.html
