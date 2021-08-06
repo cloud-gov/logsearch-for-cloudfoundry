@@ -24,11 +24,11 @@ const filterCSVReportingQuery = (payload, cached) => {
   let jobParams = ensureKeys(payload, ['jobParams'])
 
   // TODO:  Remove these debugging/loging lines once debugging is finished!
-  console.log('--- payload object ---')
-  console.log('payload: %o', payload)
-  console.log(' --------- ')
-  console.log('--- jobParams object ---')
-  console.log('jobParams: %o', jobParams)
+  server.log(["debug", "authentication", "helpers:filterCSVReportingQuery"], `-------------`)
+  server.log(["debug", "authentication", "helpers:filterCSVReportingQuery"], `payload object: ${payload}`)
+  server.log(["debug", "authentication", "helpers:filterCSVReportingQuery"], `-------------`)
+  server.log(["debug", "authentication", "helpers:filterCSVReportingQuery"], `jobParams object: ${jobParams}`)
+  server.log(["debug", "authentication", "helpers:filterCSVReportingQuery"], `-------------`)
 
   let decodedJobParams = rison.decode(jobParams)
   let bool = ensureKeys(decodedJobParams, ['searchRequest', 'body', 'query', 'bool'])
