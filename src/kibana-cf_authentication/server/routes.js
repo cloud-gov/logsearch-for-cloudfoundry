@@ -1,5 +1,10 @@
 const rison = require('rison-node')
-const { filterQuery, filterInternalQuery, filterSuggestionQuery } = require('./helpers')
+const {
+  filterQuery,
+  filterInternalQuery,
+  filterSuggestionQuery,
+  filterCSVReportingQuery
+} = require('./helpers')
 
 module.exports = (server, config, cache) => {
   return [
@@ -317,7 +322,11 @@ module.exports = (server, config, cache) => {
           try {
             cached = await cache.get(request.auth.credentials.session_id)
 
-            if (cached.account.orgs.indexOf(config.get('authentication.cf_system_org')) === -1 && !(config.get('authentication.skip_authorization'))) {
+            if (cached
+              && cached.account
+              && cached.account.orgs
+              && cached.account.orgs.indexOf(config.get('authentication.cf_system_org')) === -1
+              && !(config.get('authentication.skip_authorization'))) {
               let payloadJSON = JSON.parse(request.payload.toString() || '{}')
               let payload = filterCSVReportingQuery(payloadJSON, cached)
               options.payload = new Buffer(JSON.stringify(payload))
