@@ -17,17 +17,11 @@ const ensureKeys = (value, keys) => {
   return value
 }
 
-const filterCSVReportingQuery = (payload, cached, server=console) => {
+const filterCSVReportingQuery = (payload, cached) => {
   // query for /api/reporting/generate/csv/ endpoints after kibana 7.7
   // Requires Rison processing support to account for the jobParams payload
   // See https://www.elastic.co/guide/en/kibana/7.x/reporting-integration.html
   let jobParams = ensureKeys(payload, ['jobParams'])
-
-  // TODO:  Remove these debugging/loging lines once debugging is finished!
-  server.log(["debug", "authentication", "helpers:filterCSVReportingQuery"], `-------------`)
-  server.log(["debug", "authentication", "helpers:filterCSVReportingQuery"], `jobParams at start: ${jobParams}`)
-  server.log(["debug", "authentication", "helpers:filterCSVReportingQuery"], `-------------`)
-
   let decodedJobParams = rison.decode(jobParams)
   let bool = ensureKeys(decodedJobParams, ['searchRequest', 'body', 'query', 'bool'])
 
@@ -41,18 +35,7 @@ const filterCSVReportingQuery = (payload, cached, server=console) => {
     { 'terms': { '@cf.org_id': cached.account.orgIds } }
   )
 
-  // TODO:  Remove these debugging/loging lines once debugging is finished!
-  server.log(["debug", "authentication", "helpers:filterCSVReportingQuery"], `-------------`)
-  server.log(["debug", "authentication", "helpers:filterCSVReportingQuery"], `jobParams after filter: ${jobParams}`)
-  server.log(["debug", "authentication", "helpers:filterCSVReportingQuery"], `-------------`)
-
   jobParams = rison.encode(decodedJobParams)
-
-  // TODO:  Remove these debugging/loging lines once debugging is finished!
-  server.log(["debug", "authentication", "helpers:filterCSVReportingQuery"], `-------------`)
-  server.log(["debug", "authentication", "helpers:filterCSVReportingQuery"], `jobParams after encode: ${jobParams}`)
-  server.log(["debug", "authentication", "helpers:filterCSVReportingQuery"], `-------------`)
-
   payload.jobParams = jobParams
 
   return payload
