@@ -191,6 +191,7 @@ module.exports = {
   filterQuery,
   filterInternalQuery,
   filterSuggestionQuery,
+  filterCSVReportingQuery,
   pathAllowed,
   uaaPaginatorV2,
   uaaPaginatorV3

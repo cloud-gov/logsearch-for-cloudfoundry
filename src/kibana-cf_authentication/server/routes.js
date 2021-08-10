@@ -1,4 +1,3 @@
-const rison = require('rison-node')
 const {
   filterQuery,
   filterInternalQuery,
