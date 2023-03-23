@@ -6,7 +6,7 @@ description: |
   Allows to upload defaults predefined in the job and custom data files.
 
 packages:
-- ruby-2.4.6-r0.16.0
+- ruby-3.1
 - python3
 - upload-kibana-objects-python3
 

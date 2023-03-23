@@ -2,8 +2,7 @@
 name: logsearch-config-logstash-filters
 
 dependencies:
-  - ruby-2.4.6-r0.16.0
-
+  - ruby-3.1
 files:
   - logsearch-config/*
   - logsearch-config/bin/*
