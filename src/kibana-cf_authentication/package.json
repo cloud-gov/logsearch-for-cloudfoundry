@@ -2,6 +2,10 @@
   "name": "authentication",
   "version": "7.9.3",
   "description": "Integrations Kibana into CF's OAuth 2 authentication mechanism + User page in Kibana",
+  "engines": {
+    "npm": ">=6.0.0 <7.0.0",
+    "node": ">=10.0.0 <11.0.0"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/cloudfoundry-community/logsearch-for-cloudfoundry.git"
@@ -23,7 +27,7 @@
     "normalize-url": "^5.3.0",
     "punycode": "^2.1.1",
     "randomstring": "^1.1.5",
-    "redis": "^4.6.13",
+    "redis": "3.1.2",
     "request": "^2.65.0",
     "rison-node": "^2.1.1",
     "topo": "^1.1.0",
@@ -31,11 +35,12 @@
     "wreck": "^14.2.0"
   },
   "devDependencies": {
-    "grunt": "^1.6.1",
+    "grunt": "1.5.3",
     "grunt-clean": "^0.4.0",
     "grunt-less": "^0.1.7",
-    "jest": "*",
-    "jest-each": "*"
+    "jest": "^27.0.0",
+    "jest-each": "^27.0.0",
+    "tap": "^15.0.0"
   },
   "license": "Apache-2.0",
   "scripts": {
