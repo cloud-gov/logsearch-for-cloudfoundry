@@ -36,12 +36,8 @@
     "wreck": "^14.2.0"
   },
   "devDependencies": {
-    "grunt": "1.6.1",
-    "grunt-clean": "^0.4.0",
-    "grunt-less": "^0.1.7",
     "jest": "^27.0.0",
-    "jest-each": "^27.0.0",
-    "tap": "^15.0.0"
+    "jest-each": "^27.0.0"
   },
   "license": "Apache-2.0",
   "scripts": {
