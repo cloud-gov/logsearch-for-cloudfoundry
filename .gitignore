@@ -62,3 +62,5 @@ ci/pipeline-merged.yml
 
 #vscode artifacts
 .vscode
+
+src/kibana-cf_authentication/node_modules

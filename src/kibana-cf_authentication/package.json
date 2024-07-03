@@ -20,27 +20,24 @@
     "bourne": "^1.1.2",
     "catbox": "^10.0.3",
     "cryptiles": "^4.1.2",
+    "got": "^11.8.6",
     "hapi-auth-cookie": "^9.0.0",
     "hoek": "^6.1.3",
     "isemail": "^3.2.0",
     "joi": "^6.9.0",
+    "minimist": "^1.2.8",
     "normalize-url": "^5.3.0",
     "punycode": "^2.1.1",
     "randomstring": "^1.1.5",
     "redis": "3.1.2",
-    "request": "^2.65.0",
     "rison-node": "^2.1.1",
     "topo": "^1.1.0",
     "uuid": "^2.0.1",
     "wreck": "^14.2.0"
   },
   "devDependencies": {
-    "grunt": "1.6.1",
-    "grunt-clean": "^0.4.0",
-    "grunt-less": "^0.1.7",
     "jest": "^27.0.0",
-    "jest-each": "^27.0.0",
-    "tap": "^15.0.0"
+    "jest-each": "^27.0.0"
   },
   "license": "Apache-2.0",
   "scripts": {

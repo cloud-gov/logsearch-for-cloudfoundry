@@ -1,5 +1,5 @@
 const util = require('util')
-const request = util.promisify(require('request'))
+const got = util.promisify(require('got'))
 const randomstring = require('randomstring')
 
 module.exports = async (Joi) => {
@@ -46,7 +46,7 @@ module.exports = async (Joi) => {
   }
   try {
     // Fetch location of login server, then set config
-    const response = await request(cfInfoUri)
+    const response = await got(cfInfoUri)
 
     const cfInfo = JSON.parse(response.body)
     const result = Joi.object({
