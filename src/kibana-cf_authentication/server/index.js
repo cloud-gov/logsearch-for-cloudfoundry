@@ -1,11 +1,11 @@
-const Bell = require('bell') // OAuth2.0 authentication library (see https://github.com/hapijs/bell for lib details)
-const AuthCookie = require('hapi-auth-cookie') // auth strategies mechanism
+const Bell = require('@hapi/bell') // OAuth2.0 authentication library (see https://github.com/hapijs/bell for lib details)
+const AuthCookie = require('@hapi/cookie') // auth strategies mechanism
 
 const initConfig = require('./config')
 const initCache = require('./cache')
 const initUaaProvider = require('./uaa-provider')
 const initRoutes = require('./routes')
-const {pathAllowed} = require('./helpers')
+const { pathAllowed } = require('./helpers')
 
 /*
  --------------------------
@@ -76,7 +76,7 @@ module.exports = (kibana) => {
        register method for a Hapi plugin except it uses promises instead of a callback
        pattern. Just return a promise when you execute an async operation.
        */
-    async init (server, options) {
+    async init(server, options) {
       const config = server.config()
 
       server.log(['debug', 'authentication'], JSON.stringify(config.get('authentication')))

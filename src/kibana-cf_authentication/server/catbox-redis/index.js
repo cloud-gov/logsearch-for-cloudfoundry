@@ -1,7 +1,7 @@
 // Load modules
 
 const Redis = require('redis')
-const Hoek = require('hoek')
+const Hoek = require('@hapi/hoek')
 
 // Declare internals
 
@@ -13,7 +13,7 @@ const internals = {
 }
 
 class Connection {
-  constructor (options) {
+  constructor(options) {
     Hoek.assert(
       this.constructor === Connection,
       'Redis cache client must be instantiated using new'
@@ -24,7 +24,7 @@ class Connection {
     return this
   }
 
-  async start () {
+  async start() {
     if (this.client) {
       return
     }
@@ -54,7 +54,7 @@ class Connection {
     })
   }
 
-  stop () {
+  stop() {
     if (this.client) {
       this.client.removeAllListeners()
       this.client.quit()
@@ -62,11 +62,11 @@ class Connection {
     }
   }
 
-  isReady () {
+  isReady() {
     return !!this.client && this.client.connected
   }
 
-  validateSegmentName (name) {
+  validateSegmentName(name) {
     if (!name) {
       return new Error('Empty string')
     }
@@ -78,7 +78,7 @@ class Connection {
     return null
   }
 
-  async get (key) {
+  async get(key) {
     const self = this
 
     return new Promise((resolve, reject) => {
@@ -111,7 +111,7 @@ class Connection {
     })
   }
 
-  async set (key, value, ttl) {
+  async set(key, value, ttl) {
     return new Promise((resolve, reject) => {
       if (!this.client) {
         return reject(new Error('catbox-redis.set.Connection not started'))
@@ -149,7 +149,7 @@ class Connection {
     })
   }
 
-  async drop (key) {
+  async drop(key) {
     return new Promise((resolve, reject) => {
       if (!this.client) {
         return reject(new Error('catbox-redis.drop.Connection not started'))
@@ -162,7 +162,7 @@ class Connection {
     })
   }
 
-  generateKey (key) {
+  generateKey(key) {
     return `${encodeURIComponent(this.settings.partition)}:${encodeURIComponent(key.segment)}:${encodeURIComponent(key.id)}`
   }
 }
