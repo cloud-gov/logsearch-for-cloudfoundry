@@ -3,7 +3,7 @@
   "version": "7.9.3",
   "description": "Integrations Kibana into CF's OAuth 2 authentication mechanism + User page in Kibana",
   "engines": {
-    "npm": ">=6.0.0 <7.0.0",
+    "npm": ">=7.0.0",
     "node": ">=10.0.0 <11.0.0"
   },
   "repository": {
@@ -19,7 +19,7 @@
     "@hapi/boom": "^9.1.4",
     "@hapi/bounce": "^2.0.0",
     "@hapi/bourne": "^3.0.0",
-    "@hapi/catbox": "11.0.0",
+    "@hapi/catbox": "10.2.3",
     "got": "^11.8.6",
     "@hapi/cookie": "^11.0.2",
     "@hapi/hoek": "^9.0.3",
@@ -34,7 +34,8 @@
     "@hapi/topo": "^3.1.6",
     "uuid": "^2.0.1",
     "@hapi/wreck": "^17.2.0",
-    "@hapi/teamwork": "5.0.0"
+    "@hapi/podium": "3.4.3",
+    "@hapi/teamwork": "^3.0.0"
   },
   "devDependencies": {
     "jest": "^27.0.0",
@@ -43,5 +44,10 @@
   "license": "Apache-2.0",
   "scripts": {
     "test": "npx jest"
+  },
+  "overrides": {
+    "@hapi/podium": {
+      "@hapi/teamwork": "4.0.0"
+    }
   }
 }
