@@ -3,7 +3,7 @@
   "version": "7.9.3",
   "description": "Integrations Kibana into CF's OAuth 2 authentication mechanism + User page in Kibana",
   "engines": {
-    "npm": ">=7.0.0",
+    "npm": ">=6.0.0 <7.0.0",
     "node": ">=10.0.0 <11.0.0"
   },
   "repository": {
