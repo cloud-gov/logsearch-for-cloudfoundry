@@ -1,4 +1,4 @@
-const Catbox = require('@hapi/catbox')
+const Catbox = require('catbox')
 const RedisClient = require('./catbox-redis')
 
 module.exports = async (server) => {
