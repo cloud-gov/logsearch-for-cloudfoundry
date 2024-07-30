@@ -1,7 +1,7 @@
 // Load modules
 
 const Redis = require('redis')
-const Hoek = require('@hapi/hoek')
+const Hoek = require('hoek')
 
 // Declare internals
 

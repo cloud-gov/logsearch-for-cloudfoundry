@@ -1,5 +1,5 @@
 const Bell = require('bell') // OAuth2.0 authentication library (see https://github.com/hapijs/bell for lib details)
-const AuthCookie = require('cookie') // auth strategies mechanism
+const AuthCookie = require('hapi-auth-cookie') // auth strategies mechanism
 
 const initConfig = require('./config')
 const initCache = require('./cache')
