@@ -34,7 +34,7 @@ module.exports = async (Joi) => {
   const useRedisSessions = (process.env.REDIS_HOST) ? true : false
   const redisHost = (process.env.REDIS_HOST) ? process.env.REDIS_HOST : '127.0.0.1'
   const redisPort = (process.env.REDIS_PORT) ? process.env.REDIS_PORT : '6379'
-  const cfInfoUri = cloudFoundryApiUri + '/v2/info'
+  const cfInfoUri = cloudFoundryApiUri + '/'
   const sessionExpirationMs = (process.env.SESSION_EXPIRATION_MS)
     ? process.env.SESSION_EXPIRATION_MS
     : 12 * 60 * 60 * 1000 // 12 hours by default
@@ -55,8 +55,8 @@ module.exports = async (Joi) => {
       client_secret: Joi.string().default(clientSecret),
       skip_ssl_validation: Joi.boolean().default(skipSslValidation),
       cf_system_org: Joi.string().default(cfSystemOrg),
-      authorization_uri: Joi.string().default(cfInfo.authorization_endpoint + '/oauth/authorize'),
-      logout_uri: Joi.string().default(cfInfo.authorization_endpoint + '/logout.do' +
+      authorization_uri: Joi.string().default(cfInfo.uaa + '/oauth/authorize'),
+      logout_uri: Joi.string().default(cfInfo.uaa + '/logout.do' +
         /*
           Set 'redirect' parameter
           if logout_redirect_uri property is set to get back to Kibana app after logout.
@@ -65,11 +65,11 @@ module.exports = async (Joi) => {
           in UAA - e.g. https://github.com/cloudfoundry/uaa/blob/3.9.3/uaa/src/main/resources/login.yml#L38-L45)
         */
         ((logoutRedirectUri !== '') ? '?redirect=' + logoutRedirectUri : '')),
-      token_uri: Joi.string().default(cfInfo.token_endpoint + '/oauth/token'),
-      account_info_uri: Joi.string().default(cfInfo.token_endpoint + '/userinfo'),
+      token_uri: Joi.string().default(cfInfo.uaa + '/oauth/token'),
+      account_info_uri: Joi.string().default(cfInfo.uaa + '/users'),
       api_uri: Joi.string().default(cloudFoundryApiUri),
-      organizations_uri: Joi.string().default(cloudFoundryApiUri + '/v2/organizations'),
-      spaces_uri: Joi.string().default(cloudFoundryApiUri + '/v2/spaces'),
+      organizations_uri: Joi.string().default(cloudFoundryApiUri + '/v3/organizations'),
+      spaces_uri: Joi.string().default(cloudFoundryApiUri + '/v3/spaces'),
       random_passphrase: Joi.string().default(randomString),
       use_redis_sessions: Joi.boolean().default(useRedisSessions),
       redis_host: Joi.string().default(redisHost),

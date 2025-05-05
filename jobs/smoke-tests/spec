@@ -6,8 +6,8 @@ description: |
   Then these logs must be retrieved from ElasticSearch cluster
 
 packages:
-  - cf-cli-6-linux
-  - golang-1.13-linux
+  - cf-cli-8-linux
+  - golang-1.23.3-linux
   - smoke-tests
 
 templates:
