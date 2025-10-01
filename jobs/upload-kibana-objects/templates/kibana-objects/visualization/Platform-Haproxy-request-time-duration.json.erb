@@ -2,7 +2,7 @@
 {
   "attributes": {
     "title": "Platform Haproxy: request time duration",
-    "visState": "<%= JSON.parse(<<'ENDOFFJSON').to_json.gsub(/"/) { '\"' }
+    "visState": "<%= JSON.parse(<<'ENDOFFJSON').to_json.gsub(/\\/, '\\\\').gsub(/"/, '\"')
       {
         "type": "table",
         "params": {
@@ -44,7 +44,7 @@ ENDOFFJSON
     "savedSearchRefName": "search_0",
     "version": 1,
     "kibanaSavedObjectMeta": {
-      "searchSourceJSON": "<%= JSON.parse(<<'ENDOFFJSON').to_json.gsub(/"/) { '\"' }
+      "searchSourceJSON": "<%= JSON.parse(<<'ENDOFFJSON').to_json.gsub(/\\/, '\\\\').gsub(/"/, '\"')
       {
         "filter": [
 

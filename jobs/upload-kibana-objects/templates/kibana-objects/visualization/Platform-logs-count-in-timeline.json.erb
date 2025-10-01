@@ -2,7 +2,7 @@
 {
   "attributes": {
     "title": "Platform: logs count in timeline",
-    "visState": "<%= JSON.parse(<<'ENDOFFJSON').to_json.gsub(/"/) { '\"' }
+    "visState": "<%= JSON.parse(<<'ENDOFFJSON').to_json.gsub(/\\/, '\\\\').gsub(/"/, '\"')
       {
         "type": "area",
         "params": {
@@ -85,7 +85,7 @@
       }
 ENDOFFJSON
   %>",
-    "uiStateJSON": "<%= JSON.parse(<<'ENDOFFJSON').to_json.gsub(/"/) { '\"' }
+    "uiStateJSON": "<%= JSON.parse(<<'ENDOFFJSON').to_json.gsub(/\\/, '\\\\').gsub(/"/, '\"')
       {
         "vis": {
           "colors": {
@@ -105,7 +105,7 @@ ENDOFFJSON
     "savedSearchRefName": "search_0",
     "version": 1,
     "kibanaSavedObjectMeta": {
-      "searchSourceJSON": "<%= JSON.parse(<<'ENDOFFJSON').to_json.gsub(/"/) { '\"' }
+      "searchSourceJSON": "<%= JSON.parse(<<'ENDOFFJSON').to_json.gsub(/\\/, '\\\\').gsub(/"/, '\"')
       {
         "filter": [
 

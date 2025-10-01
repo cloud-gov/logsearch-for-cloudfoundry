@@ -2,7 +2,7 @@
 {
   "attributes": {
     "title": "Platform Haproxy: request time duration (50th, 95th, 99th %tile; top 5)",
-    "visState": "<%= JSON.parse(<<'ENDOFFJSON').to_json.gsub(/"/) { '\"' }
+    "visState": "<%= JSON.parse(<<'ENDOFFJSON').to_json.gsub(/\\/, '\\\\').gsub(/"/, '\"')
       {
         "type": "line",
         "params": {
@@ -52,7 +52,7 @@
       }
 ENDOFFJSON
   %>",
-    "uiStateJSON": "<%= JSON.parse(<<'ENDOFFJSON').to_json.gsub(/"/) { '\"' }
+    "uiStateJSON": "<%= JSON.parse(<<'ENDOFFJSON').to_json.gsub(/\\/, '\\\\').gsub(/"/, '\"')
       {
         "vis": {
           "colors": {
@@ -69,7 +69,7 @@ ENDOFFJSON
     "savedSearchRefName": "search_0",
     "version": 1,
     "kibanaSavedObjectMeta": {
-      "searchSourceJSON": "<%= JSON.parse(<<'ENDOFFJSON').to_json.gsub(/"/) { '\"' }
+      "searchSourceJSON": "<%= JSON.parse(<<'ENDOFFJSON').to_json.gsub(/\\/, '\\\\').gsub(/"/, '\"')
       {
         "filter": [
 
