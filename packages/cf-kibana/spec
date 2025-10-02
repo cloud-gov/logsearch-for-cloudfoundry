@@ -1,8 +1,0 @@
----
-name: cf-kibana
-
-dependencies:
-  - kibana-auth-plugin
-
-files:
-  - cf-kibana/kibana-7.9.3-linux-x86_64.tar.gz
