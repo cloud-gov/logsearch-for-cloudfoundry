@@ -23,7 +23,7 @@
       {
         "index": "#{p('elasticsearch_config.app_index_prefix')}*",
         "filter": [
-          
+
         ],
         "highlight": {
           "pre_tags": [
@@ -34,7 +34,7 @@
           ],
           "fields": {
             "*": {
-              
+
             }
           },
           "require_field_match": false,
@@ -47,7 +47,7 @@
           }
         }
       }.to_json
-  ).to_json.gsub(/"/) { '\"' }
+  ).to_json.gsub(/\\/, '\\\\').gsub(/"/, '\"')
   %>"
     }
   }

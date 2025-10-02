@@ -7,7 +7,6 @@ description: |
 
 packages:
 - ruby-3.1
-- python3
 - upload-kibana-objects-python3
 
 consumes:
