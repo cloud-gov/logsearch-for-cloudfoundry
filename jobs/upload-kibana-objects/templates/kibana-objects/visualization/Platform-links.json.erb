@@ -2,7 +2,7 @@
 {
   "attributes": {
     "title": "Platform links",
-    "visState": "<%= JSON.parse(<<'ENDOFFJSON').to_json.gsub(/"/) { '\"' }
+    "visState": "<%= JSON.parse(<<'ENDOFFJSON').to_json.gsub(/\\/, '\\\\').gsub(/"/, '\"')
       {
         "type": "markdown",
         "params": {
@@ -16,7 +16,7 @@ ENDOFFJSON
     "description": "",
     "version": 1,
     "kibanaSavedObjectMeta": {
-      "searchSourceJSON": "<%= JSON.parse(<<'ENDOFFJSON').to_json.gsub(/"/) { '\"' }
+      "searchSourceJSON": "<%= JSON.parse(<<'ENDOFFJSON').to_json.gsub(/\\/, '\\\\').gsub(/"/, '\"')
       {
         "query": {
           "query_string": {
