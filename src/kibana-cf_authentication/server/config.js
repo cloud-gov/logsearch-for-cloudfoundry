@@ -15,10 +15,6 @@ module.exports = async (Joi) => {
     ? process.env.KIBANA_OAUTH2_CLIENT_SECRET
     : 'client_secret'
 
-  const skipSslValidation = (process.env.SKIP_SSL_VALIDATION)
-    ? (process.env.SKIP_SSL_VALIDATION.toLowerCase() === 'true')
-    : false
-
   const cfSystemOrg = (process.env.CF_SYSTEM_ORG) ? process.env.CF_SYSTEM_ORG : 'system'
 
   if (!process.env.CF_API_URI) {
@@ -41,9 +37,6 @@ module.exports = async (Joi) => {
   const randomString = process.env.SESSION_KEY || randomstring.generate(40)
   const skipAuthorization = process.env.SKIP_AUTHORIZATION
 
-  if (skipSslValidation) {
-    process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
-  }
   try {
     // Fetch location of login server, then set config
     const response = await request(cfInfoUri)
