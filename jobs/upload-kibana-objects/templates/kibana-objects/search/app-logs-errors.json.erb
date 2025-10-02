@@ -71,7 +71,7 @@
           ],
           "fields": {
             "*": {
-              
+
             }
           },
           "require_field_match": false,
@@ -84,7 +84,7 @@
           }
         }
       }.to_json
-  ).to_json.gsub(/"/) { '\"' }
+  ).to_json.gsub(/\\/, '\\\\').gsub(/"/, '\"')
   %>"
     }
   }

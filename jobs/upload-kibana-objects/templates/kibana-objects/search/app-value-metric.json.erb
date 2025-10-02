@@ -62,7 +62,7 @@
           "fragment_size": 2147483647
         }
       }.to_json
-  ).to_json.gsub(/"/) { '\"' }
+  ).to_json.gsub(/\\/, '\\\\').gsub(/"/, '\"')
   %>"
     }
   }
