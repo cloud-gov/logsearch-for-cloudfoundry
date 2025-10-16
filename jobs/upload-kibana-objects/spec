@@ -106,7 +106,7 @@ properties:
     default: []
   kibana_objects.default_index:
     description: "Default index to set in Kibana"
-    default: "logs-app*"
+    default: "logs-platform*"
   kibana_objects.host_name:
     description: the host-portion of the FQDN kibana is served from, without the domain name
     default: logs
@@ -142,3 +142,9 @@ properties:
     description: |
       Name prefix of your `platform` log indices. If you don't split `app` and `platform` indices, then just set it with the value of `elasticsearch_config.index_prefix`.
     default: "logs-platform"
+  kibana_ip:
+    description: ip address of one of the kibana nodes needed for upload-kibana-objects script
+    default: kibana.logsearch-platform.internal
+  kibana_port:
+    description: port kibana is listening on (not oauth-proxy's port)
+    default: 5602
