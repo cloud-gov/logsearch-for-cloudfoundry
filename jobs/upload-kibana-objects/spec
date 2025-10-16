@@ -107,14 +107,8 @@ properties:
   kibana_objects.default_index:
     description: "Default index to set in Kibana"
     default: "logs-platform*"
-  kibana_objects.host_name:
-    description: the host-portion of the FQDN kibana is served from, without the domain name
-    default: logs
-  kibana_objects.login_host_name:
-    description: the host-portion of the login FQDN, without the domain name
-    default: login
-  kibana_objects.kibana_ip:
-    description: ip address of one of the kibana nodes needed for upload-kibana-objects script
+  kibana_objects.kibana_host:
+    description: host address of one of the kibana nodes needed for upload-kibana-objects script, should match to a bosh-dns-alias defined in the deployment manifest
     default: kibana.logsearch-platform.internal
   kibana_objects.kibana_port:
     description: port kibana is listening on (not oauth-proxy's port)

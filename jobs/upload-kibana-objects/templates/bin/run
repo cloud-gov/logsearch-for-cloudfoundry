@@ -9,6 +9,9 @@ export PYTHONPATH="/var/vcap/packages/python3/lib/python3.6/site-packages${PYTHO
 export LD_LIBRARY_PATH="/var/vcap/packages/python3/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
 export REQUESTS_CA_BUNDLE="/etc/ssl/certs/ca-certificates.crt"
 
+source /var/vcap/packages/upload-kibana-objects-python3/venv/bin/activate
+pip install --upgrade --force-reinstall requests
+
 echo "[$(date)] Calling 'generate-objects'..."
 $(dirname $0)/generate-objects
 
