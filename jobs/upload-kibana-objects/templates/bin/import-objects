@@ -26,13 +26,13 @@ if __name__ == "__main__":
     for filename in glob.iglob('/var/vcap/jobs/upload-kibana-objects/kibana-objects/**/*.json', recursive=True):
         headers = {'content-type': 'application/json', 'kbn-xsrf': 'true'}
         r = session.post(
-                'http://<%= kibana_ip %>:<%= kibana_port %>/api/saved_objects/{}/{}'.format(os.path.basename(os.path.dirname(filename)), os.path.basename(os.path.splitext(filename)[0])),
+                'http://<%= p('kibana_objects.kibana_ip') %>:<%= p('kibana_objects.kibana_port') %>/api/saved_objects/{}/{}'.format(os.path.basename(os.path.dirname(filename)), os.path.basename(os.path.splitext(filename)[0])),
                 data=open(filename, 'rb'),
                 headers=headers
         )
         if r.status_code == 409:
             put = session.put(
-                    'http://<%= kibana_ip %>:<%= kibana_port %>/api/saved_objects/{}/{}'.format(os.path.basename(os.path.dirname(filename)), os.path.basename(os.path.splitext(filename)[0])),
+                    'http://<%= p('kibana_objects.kibana_ip') %>:<%= p('kibana_objects.kibana_port') %>/api/saved_objects/{}/{}'.format(os.path.basename(os.path.dirname(filename)), os.path.basename(os.path.splitext(filename)[0])),
                     data=open(filename, 'rb'),
                     headers=headers
             )
@@ -46,7 +46,7 @@ if __name__ == "__main__":
             logging.info('Object %s Failed to Upload', filename)
 
     r = session.post(
-      'http://<%= kibana_ip %>:<%= kibana_port %>/api/kibana/settings',
+      'http://<%= p('kibana_objects.kibana_ip') %>:<%= p('kibana_objects.kibana_port') %>/api/kibana/settings',
       data='{"changes":{"defaultIndex":"<%= p('kibana_objects.default_index') %>"}}',
       headers=headers
     )
