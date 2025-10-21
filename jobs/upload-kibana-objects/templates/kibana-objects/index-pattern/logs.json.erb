@@ -231,5 +231,7 @@ end
     "title": "<%= p('elasticsearch_config.index_prefix') %>*",
     "timeFieldName": "@timestamp",
     "fields": "<%= fields_json.to_json.gsub(/\\/, '\\\\').gsub(/"/, '\"') %>"
-  }
+  },
+  "id": "<%= p('elasticsearch_config.index_prefix') %>*",
+  "type":"index-pattern"
 }
