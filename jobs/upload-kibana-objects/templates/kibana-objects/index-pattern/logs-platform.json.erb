@@ -100,5 +100,7 @@ fields_json.concat(
     "title": "<%= p('elasticsearch_config.platform_index_prefix') %>*",
     "timeFieldName": "@timestamp",
     "fields": "<%= fields_json.to_json.gsub(/\\/, '\\\\').gsub(/"/, '\"') %>"
-  }
+  },
+  "id": "<%= p('elasticsearch_config.platform_index_prefix') %>*",
+  "type":"index-pattern"
 }
