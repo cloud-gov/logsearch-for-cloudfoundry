@@ -21,9 +21,9 @@ templates:
   bin/run: bin/run
 
   # Kibana objects (defaults).
-  kibana-objects/index-pattern/logs-app.json.erb:       kibana-objects/index-pattern/logs-app*.json
-  kibana-objects/index-pattern/logs.json.erb:           kibana-objects/index-pattern/logs-*.json
-  kibana-objects/index-pattern/logs-platform.json.erb:  kibana-objects/index-pattern/logs-platform*.json
+  kibana-objects/index-pattern/logs-app.json.erb:       kibana-objects/index-pattern/logs-app.json
+  kibana-objects/index-pattern/logs.json.erb:           kibana-objects/index-pattern/logs.json
+  kibana-objects/index-pattern/logs-platform.json.erb:  kibana-objects/index-pattern/logs-platform.json
 
   kibana-objects/search/app-all.json.erb:                         kibana-objects/search/app-all.json
   kibana-objects/search/app-all-messages.json.erb:                kibana-objects/search/app-all-messages.json
