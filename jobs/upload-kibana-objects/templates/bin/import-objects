@@ -22,35 +22,46 @@ logging.basicConfig(level=logging.INFO)
 
 if __name__ == "__main__":
     session = requests.Session()
+    headers = {'content-type': 'application/json', 'kbn-xsrf': 'true'}
 
     for filename in glob.iglob('/var/vcap/jobs/upload-kibana-objects/kibana-objects/**/*.json', recursive=True):
-        headers = {'content-type': 'application/json', 'kbn-xsrf': 'true'}
-        r = session.post(
-                'http://<%= p('kibana_objects.kibana_host') %>:<%= p('kibana_objects.kibana_port') %>/api/saved_objects/{}/{}'.format(os.path.basename(os.path.dirname(filename)), os.path.basename(os.path.splitext(filename)[0])),
-                data=open(filename, 'rb'),
-                headers=headers
-        )
-        if r.status_code == 409:
-            put = session.put(
+        try:
+
+            # Add object to kibana from json file.  Object type is derived from folder name.  Object name is derived from file name
+            r = session.post(
                     'http://<%= p('kibana_objects.kibana_host') %>:<%= p('kibana_objects.kibana_port') %>/api/saved_objects/{}/{}'.format(os.path.basename(os.path.dirname(filename)), os.path.basename(os.path.splitext(filename)[0])),
                     data=open(filename, 'rb'),
                     headers=headers
             )
-            if put.status_code == 200:
+            # Check for duplicate object
+            if r.status_code == 409:
+                put = session.put(
+                        'http://<%= p('kibana_objects.kibana_host') %>:<%= p('kibana_objects.kibana_port') %>/api/saved_objects/{}/{}'.format(os.path.basename(os.path.dirname(filename)), os.path.basename(os.path.splitext(filename)[0])),
+                        data=open(filename, 'rb'),
+                        headers=headers
+                )
+                if put.status_code == 200:
+                    logging.info('Object %s Uploaded Successfully', filename)
+                else:
+                    logging.info('Object %s Failed to Upload. Status Code: %s, Response: %s', filename, put.status_code, put.text)
+
+            elif r.status_code == 200:
                 logging.info('Object %s Uploaded Successfully', filename)
             else:
-                logging.info('Object %s Failed to Upload', filename)
-        elif r.status_code == 200:
-            logging.info('Object %s Uploaded Successfully', filename)
-        else:
-            logging.info('Object %s Failed to Upload', filename)
+                    logging.info('Object %s Failed to Upload. Status Code: %s, Response: %s', filename, r.status_code, r.text)
+        except Exception as e:
+            logging.exception('An error occurred while processing %s: %s', filename, e)
 
-    r = session.post(
-      'http://<%= p('kibana_objects.kibana_host') %>:<%= p('kibana_objects.kibana_port') %>/api/kibana/settings',
-      data='{"changes":{"defaultIndex":"<%= p('kibana_objects.default_index') %>"}}',
-      headers=headers
-    )
-    if r.status_code == 200:
-        logging.info('Successfully Set <%= p('kibana_objects.default_index') %> as Default Index')
-    else:
-        logging.info('Failed to Set <%= p('kibana_objects.default_index') %> as Default Index')
+    # Set default index
+    try:
+        r = session.post(
+          'http://<%= p('kibana_objects.kibana_host') %>:<%= p('kibana_objects.kibana_port') %>/api/kibana/settings',
+          data='{"changes":{"defaultIndex":"<%= p('kibana_objects.default_index') %>"}}',
+          headers=headers
+        )
+        if r.status_code == 200:
+            logging.info('Successfully Set <%= p('kibana_objects.default_index') %> as Default Index')
+        else:
+            logging.info('Failed to Set  <%= p('kibana_objects.default_index') %> as Default Index. Status Code: %s, Response: %s', r.status_code, r.text)
+    except Exception as e:
+        logging.exception('An error occurred while setting the default index: %s', e)
