@@ -1,3 +1,9 @@
+
+> [!WARNING]
+> **This repository is deprecated and no longer maintained.**
+>
+> It has been replaced by the following repository:
+> - https://github.com/cloud-gov/opensearch-boshrelease
 # Logsearch for Cloud Foundry
 
 <!--
